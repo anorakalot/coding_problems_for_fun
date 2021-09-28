@@ -50,7 +50,7 @@ int main(){
                 unsorted_min = array[y];
                 unsorted_min_index = y;
             }
-            if (array[y] < unsorted_min){
+            if (array[y] > unsorted_min){
                 unsorted_min = array[y];
                 unsorted_min_index = y;
             }
@@ -60,7 +60,7 @@ int main(){
         //     array[y] = swap;
         //   }  
         } // end of inner for loop 
-        if (unsorted_min < sorted_min){
+        if (unsorted_min > sorted_min){
             swap = array[sorted_min_index];
             array[sorted_min_index] = array[unsorted_min_index];
             array[unsorted_min_index] = swap;
@@ -78,13 +78,36 @@ int main(){
     } // end of outer for loop
 
     //just to test what array is set up properly
-     printf("SORTED ARRAY \n");
+     printf("SORTED ARRAY HIGHEST FIRST \n");
     for (int i = 0; i < n; i++){
         //std::cout << "array at: " << i << " " << array[i] << std::endl;
         printf("array at %i: %i \n", i, array[i]);
     }
-    int placing;
-    scanf("%i",placing ); // scan for input again
+    //;
+    int num_outputs;
+    
+    scanf("%i",&num_outputs);
+    
+    printf("num_output: %i \n", num_outputs);
+    int placing[n];
+    //int curr_placing;
 
+    for (int m = 0; m < num_outputs; m++){
+        scanf("%i",&placing[m] ); // scan for input again
+        printf("placing: %i ", placing[m]);
+        placing[m] -= 1;//value is just -1 of what placing is 
+        //ex. placing 5 is array[4] placing 1 is array[0] etc
+
+        //printf("placing_value %i: %i \n", placing[m], array[placing]); // do printifn in other loop because it first gets input and the outputs
+    }
+    
+    //outputs placing
+    for (int m = 0; m < num_outputs; m++){
+        printf("placing_value %i: %i \n", placing[m], array[placing[m]]);
+    }
+
+    
+    
 	return 0;
 }
+
