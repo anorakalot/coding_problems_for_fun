@@ -7,12 +7,12 @@
 int main(){
 	//gonna use for starting length of array 
     //unsigned int n;
-	int n;
+	int n;//n is number of inputs
 	//std::cin >> n; 
     scanf("%i", &n);
    
     //std::vector<int> array(n);
-    int array[n]; 
+    std::vector<int> array(n); 
     unsigned int input;
     
     for (int i = 0; i < n; i++){
@@ -22,11 +22,11 @@ int main(){
         array[i] = input;
     }
 
-    //just to test what array is set up properly
-    for (int i = 0; i < n; i++){
-        //std::cout << "array at: " << i << " " << array[i] << std::endl;
-        printf("array at %i: %i \n", i, array[i]);
-    }
+    // //just to test what array is set up properly
+    // for (int i = 0; i < n; i++){
+    //     //std::cout << "array at: " << i << " " << array[i] << std::endl;
+    //     printf("array at %i: %i \n", i, array[i]);
+    // }
 
     //need to change selection sort from min to max
     //selection sort
@@ -77,34 +77,59 @@ int main(){
         }
     } // end of outer for loop
 
-    //just to test what array is set up properly
-     printf("SORTED ARRAY HIGHEST FIRST \n");
-    for (int i = 0; i < n; i++){
-        //std::cout << "array at: " << i << " " << array[i] << std::endl;
-        printf("array at %i: %i \n", i, array[i]);
-    }
+    // //just to test what array is set up properly
+    // printf("SORTED ARRAY HIGHEST FIRST \n");
+    // for (int i = 0; i < n; i++){
+    //     ////std::cout << "array at: " << i << " " << array[i] << std::endl;
+    //     printf("array at %i: %i \n", i, array[i]);
+    // }
     //;
     int num_outputs;
     
     scanf("%i",&num_outputs);
     
-    printf("num_output: %i \n", num_outputs);
-    int placing[n];
+    //printf("num_output: %i \n", num_outputs);
+    std::vector<int> placing(n);
     //int curr_placing;
+    int placing_input;
+    
+    // printf("SORTED ARRAY before getting placing value \n");
+    // for (int i = 0; i < n; i++){
+    //     ////std::cout << "array at: " << i << " " << array[i] << std::endl;
+    //     //printf("array at %i: %i \n", i, array[i]);
+    // }
 
     for (int m = 0; m < num_outputs; m++){
-        scanf("%i",&placing[m] ); // scan for input again
-        printf("placing: %i ", placing[m]);
+        scanf("%i",&placing_input ); // scan for input again and put it into placing array
+        placing[m] = placing_input;
+        //printf("placing: %i ", placing[m]);
         placing[m] -= 1;//value is just -1 of what placing is 
         //ex. placing 5 is array[4] placing 1 is array[0] etc
-
-        //printf("placing_value %i: %i \n", placing[m], array[placing]); // do printifn in other loop because it first gets input and the outputs
+        //printf("placing[m]: %i,\n",placing[m]);
+        //printf("placing_value_before %i: array_placing: %i \n", placing[m], array[placing[m]]); // do printifn in other loop because it first gets input and the outputs
+    
     }
+    
+    // printf("SORTED ARRAY after getting placing value \n");
+    // for (int i = 0; i < n; i++){
+    //     ////std::cout << "array at: " << i << " " << array[i] << std::endl;
+    //     printf("array at %i: %i \n", i, array[i]);
+    // }
+    //printf("placing_value,0 %i: array[0]%i \n", placing[0], array[placing[0]]);
     
     //outputs placing
     for (int m = 0; m < num_outputs; m++){
-        printf("placing_value %i: %i \n", placing[m], array[placing[m]]);
+        //printf("placing_value %i: array_placing: %i \n", placing[m], array[placing[m]]);
+        //printf("%i \n", array[placing[m]]);
+        printf("%i\n",array[placing[m]]);
     }
+
+    // //
+    // printf("SORTED ARRAY RIGHT BEFORE END \n");
+    // for (int i = 0; i < n; i++){
+    //     ////std::cout << "array at: " << i << " " << array[i] << std::endl;
+    //     printf("array at %i: %i \n", i, array[i]);
+    // }
 
     
     
