@@ -40,18 +40,19 @@ std::vector<int> merge_sort(std::vector<int> array_input, int n_input)
         printf("array at %i: %i \n", i, right_array[i]);
     }
     printf("MERGE SORT LEFT ARRAY\n");
-    merge_sort(left_array, (n_input / 2));
+    left_array = merge_sort(left_array, (n_input / 2));
     printf("MERGE SORT RIGHT ARRAY\n");
-    merge_sort(right_array, (n_input / 2));
+    right_array = merge_sort(right_array, (n_input / 2));
     
     std::vector<int> merged_array;
     
     merged_array = merge(left_array, right_array);
  
     printf("merged ARRAY\n");
-    for (int i = 0; i <= right_array.size(); i++){
-        printf("array at %i: %i \n", i, right_array[i]);
+    for (int i = 0; i < merged_array.size(); i++){
+        printf("array at %i: %i \n", i, merged_array[i]);
     }
+
     return merged_array;
 }
 
@@ -94,7 +95,12 @@ std::vector<int> merge(std::vector<int> left_input, std::vector<int> right_input
         right_input_index += 1;
     }
 
-    
+
+    printf("merged ARRAY IN FUCT\n");
+    printf("left_input_end %i\n" , left_input_end);
+    for (int i = 0; i < merged_array.size(); i++){
+        printf("array at %i: %i \n", i, merged_array[i]);
+    }
     return merged_array;
 }
 
