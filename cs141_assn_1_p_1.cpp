@@ -20,7 +20,8 @@ std::vector<int> merge_sort(std::vector<int> array_input, int n_input)
     
     //do low + ((high-low)/2)
     
-    if (n_input == 1){
+    if (n_input <= 1){
+        printf("n_input is %i just returning %i value of array_input[0]\n",n_input, array_input[0]);
         return array_input;
     }
     //if (n_input >1){
@@ -29,27 +30,29 @@ std::vector<int> merge_sort(std::vector<int> array_input, int n_input)
                                 array_input.begin() + (n_input/2));
     printf("LEFT ARRAY\n");
     for (int i = 0; i < left_array.size(); i++){
-        ////std::cout << "array at: " << i << " " << array[i] << std::endl;
         printf("array at %i: %i \n", i, left_array[i]);
     }
 
-    
-    std::vector<int> right_array(array_input.begin() + ((n_input/2)+1), array_input.end());
+    std::vector<int> right_array(array_input.begin() + ((n_input/2)), array_input.end());
 
     printf("RIGHT ARRAY\n");
     for (int i = 0; i < right_array.size(); i++){
-        ////std::cout << "array at: " << i << " " << array[i] << std::endl;
         printf("array at %i: %i \n", i, right_array[i]);
     }
-    
+    printf("MERGE SORT LEFT ARRAY\n");
     merge_sort(left_array, (n_input / 2));
+    printf("MERGE SORT RIGHT ARRAY\n");
     merge_sort(right_array, (n_input / 2));
     
     std::vector<int> merged_array;
     
-    return merge(left_array, right_array);
+    merged_array = merge(left_array, right_array);
  
-    
+    printf("merged ARRAY\n");
+    for (int i = 0; i <= right_array.size(); i++){
+        printf("array at %i: %i \n", i, right_array[i]);
+    }
+    return merged_array;
 }
 
 std::vector<int> merge(std::vector<int> left_input, std::vector<int> right_input)
@@ -62,28 +65,36 @@ std::vector<int> merge(std::vector<int> left_input, std::vector<int> right_input
     int right_input_end = right_input.size() - 1;
     // int left_input_active=0;
     // int right_input_active=0;
-    while (left_input_index > left_input_end && right_input_index > right_input_end)
+    printf("While left_input_index <= left_input_end && right_input_index <= right_input_end\n");
+    while (left_input_index <= left_input_end && right_input_index <= right_input_end)
     {
-        if (left_input[left_input_index] > right_input[right_input_index])
+        if (left_input[left_input_index] < right_input[right_input_index])
         {
-            printf("SWAPPING IN MERGE\n");
-            swap = left_input[left_input_index];
-            left_input[left_input_index] = right_input[right_input_index];
-            right_input[right_input_index] = swap;
-
+           printf("adding %i at index %i to merged_array left_input\n", left_input[left_input_index],left_input_index);
+           merged_array.push_back(left_input[left_input_index]);
+           left_input_index +=1;
         } //enf of if statement swap for merge
-        if (left_input_index > left_input_end)
+        else 
         {
-            merged_array.push_back(left_input[left_input_index]);
-            left_input_index += 1;
-            
-        }
-        if (right_input_index > right_input_end)
-        {
+            printf("adding %i at index %i to merged_array right_input\n", right_input[right_input_index] ,right_input_index);
             merged_array.push_back(right_input[right_input_index]);
-            right_input_index+=1;
+            right_input_index +=1;
         }
     }
+    printf("While left_input_index <= left_input_end only\n");
+    while (left_input_index <= left_input_end){
+        printf("adding %i at index %i to merged_array left_input\n", left_input[left_input_index],left_input_index);
+        merged_array.push_back(left_input[left_input_index]);
+        left_input_index += 1;
+    }
+     printf("While right_input_index <= right_input_end only\n");
+    while (right_input_index <= right_input_end){
+        printf("adding %i at index %i to merged_array right_input\n", right_input[right_input_index] ,right_input_index);
+        merged_array.push_back(right_input[right_input_index]);
+        right_input_index += 1;
+    }
+
+    
     return merged_array;
 }
 
