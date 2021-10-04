@@ -3,9 +3,10 @@
 //#include <vector>
 #include "stdio.h"
 #include <vector>
+//#include <algorithm>
 
 //homebrew merge_sort with psudeo-code help
-std::vector<int> merge(std::vector<int> , std::vector<int> );
+std::vector<int> merge(std::vector<int>, std::vector<int>);
 int test_func();
 
 std::vector<int> merge_sort(std::vector<int> array_input, int n_input)
@@ -17,39 +18,54 @@ std::vector<int> merge_sort(std::vector<int> array_input, int n_input)
     //     //return array_input;
     // }
 
-    
     //do low + ((high-low)/2)
-    
-    if (n_input <= 1){
-        printf("n_input is %i just returning %i value of array_input[0]\n",n_input, array_input[0]);
+
+    int end = array_input.size() - 1;
+    int start = 0;
+    int m;
+    if (n_input % 2 == 0)
+    {
+        m = (n_input / 2);
+    }
+    else
+    {
+        m = (n_input + 1) / 2;
+    }
+    if (n_input <= 1)
+    {
+        printf("n_input is %i just returning %i value of array_input[0]\n", n_input, array_input[0]);
         return array_input;
     }
     //if (n_input >1){
-    printf("array_input.begin() + (n_input/2)) = %i \n", array_input.begin() + (n_input/2));
+    printf("array_input.begin() + (n_input/2)) = %i \n", array_input.begin() + (n_input / 2));
     std::vector<int> left_array(array_input.begin(),
-                                array_input.begin() + (n_input/2)); //array_input.end() - (n_input/2))//array_input.begin() + (n_input/2));
+                                array_input.begin() + (n_input / 2)); //array_input.end() - (n_input/2))//array_input.begin() + (n_input/2));
+
     printf("LEFT ARRAY\n");
-    for (int i = 0; i < left_array.size(); i++){
+    for (int i = 0; i < left_array.size(); i++)
+    {
         printf("array at %i: %i \n", i, left_array[i]);
     }
 
-    std::vector<int> right_array(array_input.begin() + ((n_input/2)), array_input.end());
+    std::vector<int> right_array(array_input.begin() + ((n_input / 2)), array_input.end());
 
     printf("RIGHT ARRAY\n");
-    for (int i = 0; i < right_array.size(); i++){
+    for (int i = 0; i < right_array.size(); i++)
+    {
         printf("array at %i: %i \n", i, right_array[i]);
     }
     printf("MERGE SORT LEFT ARRAY\n");
     left_array = merge_sort(left_array, (n_input / 2));
     printf("MERGE SORT RIGHT ARRAY\n");
     right_array = merge_sort(right_array, (n_input / 2)); // I think making left_array and right_array = merge_sort fixed it
-    
+
     std::vector<int> merged_array;
-    
+
     merged_array = merge(left_array, right_array);
- 
+
     printf("merged ARRAY\n");
-    for (int i = 0; i < merged_array.size(); i++){
+    for (int i = 0; i < merged_array.size(); i++)
+    {
         printf("array at %i: %i \n", i, merged_array[i]);
     }
 
@@ -69,37 +85,108 @@ std::vector<int> merge(std::vector<int> left_input, std::vector<int> right_input
     printf("While left_input_index <= left_input_end && right_input_index <= right_input_end\n");
     while (left_input_index <= left_input_end && right_input_index <= right_input_end)
     {
-        printf("left_input: %i, Right_input: %i\n",left_input[left_input_index],right_input[right_input_index]);
+        printf("left_input: %i, Right_input: %i\n", left_input[left_input_index], right_input[right_input_index]);
         if (left_input[left_input_index] < right_input[right_input_index])
         {
-           printf("adding %i at index %i to merged_array left_input\n", left_input[left_input_index],left_input_index);
-           merged_array.push_back(left_input[left_input_index]);
-           left_input_index +=1;
+            printf("adding %i at index %i to merged_array left_input\n", left_input[left_input_index], left_input_index);
+            merged_array.push_back(left_input[left_input_index]);
+            left_input_index += 1;
         } //end of if statement swap for merge
-        else 
+        else
         {
-            printf("adding %i at index %i to merged_array right_input\n", right_input[right_input_index] ,right_input_index);
+            printf("adding %i at index %i to merged_array right_input\n", right_input[right_input_index], right_input_index);
             merged_array.push_back(right_input[right_input_index]);
-            right_input_index +=1;
+            right_input_index += 1;
         }
     }
     printf("While left_input_index <= left_input_end only\n");
-    while (left_input_index <= left_input_end){
-        printf("adding %i at index %i to merged_array left_input\n", left_input[left_input_index],left_input_index);
+    while (left_input_index <= left_input_end)
+    {
+        printf("adding %i at index %i to merged_array left_input\n", left_input[left_input_index], left_input_index);
+        int index_1 = left_input_index;
+        int index_2 = left_input_index + 1;
+        for (int i = 0; i < right_input.size(); i++)
+        {
+            if (index_2 >= left_input_end)
+                
+            {
+                break;
+            }
+
+            if (left_input[index_1] < left_input[index_2])
+            {
+                //printf("Swapping %i with %i: \n",array[index_1], array[index_2]);
+                swap = left_input[index_1];
+                left_input[index_1] = left_input[index_2];
+                left_input[index_2] = swap;
+            }
+            index_1 += 1;
+            index_2 += 1;
+
+        } //end of for loop for bubble sort in mergesort unsorted arrays
         merged_array.push_back(left_input[left_input_index]);
         left_input_index += 1;
-    }
+    }//end of while left_input_index
+
     printf("While right_input_index <= right_input_end only\n");
-    while (right_input_index <= right_input_end){
-        printf("adding %i at index %i to merged_array right_input\n", right_input[right_input_index] ,right_input_index);
+    while (right_input_index <= right_input_end)
+    {
+
+        printf("adding %i at index %i to merged_array right_input\n", right_input[right_input_index], right_input_index);
+        int index_1 = right_input_index;
+        int index_2 = right_input_index + 1;
+        for (int i = 0; i < right_input.size(); i++)
+        {
+            if (index_2 >= right_input_end)
+                ;
+            {
+                break;
+            }
+
+            if (right_input[index_1] < right_input[index_2])
+            {
+                //printf("Swapping %i with %i: \n",array[index_1], array[index_2]);
+                swap = right_input[index_1];
+                right_input[index_1] = right_input[index_2];
+                right_input[index_2] = swap;
+            }
+            index_1 += 1;
+            index_2 += 1;
+
+        } //end of for loop for bubble sort in mergesort unsorted arrays
         merged_array.push_back(right_input[right_input_index]);
         right_input_index += 1;
-    }
+
+    } //end of while right_input_index
 
 
+    //gonna do one last bubble sort with whole merged_array
+    int index_1 = 0;
+    int index_2 = 1;
+        for (int i = 0; i < merged_array.size(); i++)
+        {
+            if (index_2 >= merged_array.size())
+                
+            {
+                break;
+            }
+
+            if (merged_array[index_1] < merged_array[index_2])
+            {
+                //printf("Swapping %i with %i: \n",array[index_1], array[index_2]);
+                swap = merged_array[index_1];
+                merged_array[index_1] = merged_array[index_2];
+                merged_array[index_2] = swap;
+            }
+            index_1 += 1;
+            index_2 += 1;
+
+        } //end of for loop for bubble sort in mergesort unsorted arrays
     printf("merged ARRAY IN FUCT\n");
-    printf("left_input_end %i\n" , left_input_end);
-    for (int i = 0; i < merged_array.size(); i++){
+    printf("left_input_end %i\n", left_input_end);
+
+    for (int i = 0; i < merged_array.size(); i++)
+    {
         printf("array at %i: %i \n", i, merged_array[i]);
     }
 
@@ -138,11 +225,13 @@ int main()
     // }
 
     //MERGE SORT
-    array = merge_sort(array,n);
+    array = merge_sort(array, n);
+
 
     //just to test what array is set up properly
     printf("SORTED ARRAY HIGHEST FIRST \n");
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++)
+    {
         ////std::cout << "array at: " << i << " " << array[i] << std::endl;
         printf("array at %i: %i \n", i, array[i]);
     }
