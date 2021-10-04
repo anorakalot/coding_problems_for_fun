@@ -25,9 +25,9 @@ std::vector<int> merge_sort(std::vector<int> array_input, int n_input)
         return array_input;
     }
     //if (n_input >1){
-    
+    printf("array_input.begin() + (n_input/2)) = %i \n", array_input.begin() + (n_input/2));
     std::vector<int> left_array(array_input.begin(),
-                                array_input.begin() + (n_input/2));
+                                array_input.begin() + (n_input/2)); //array_input.end() - (n_input/2))//array_input.begin() + (n_input/2));
     printf("LEFT ARRAY\n");
     for (int i = 0; i < left_array.size(); i++){
         printf("array at %i: %i \n", i, left_array[i]);
@@ -42,7 +42,7 @@ std::vector<int> merge_sort(std::vector<int> array_input, int n_input)
     printf("MERGE SORT LEFT ARRAY\n");
     left_array = merge_sort(left_array, (n_input / 2));
     printf("MERGE SORT RIGHT ARRAY\n");
-    right_array = merge_sort(right_array, (n_input / 2));
+    right_array = merge_sort(right_array, (n_input / 2)); // I think making left_array and right_array = merge_sort fixed it
     
     std::vector<int> merged_array;
     
@@ -69,12 +69,13 @@ std::vector<int> merge(std::vector<int> left_input, std::vector<int> right_input
     printf("While left_input_index <= left_input_end && right_input_index <= right_input_end\n");
     while (left_input_index <= left_input_end && right_input_index <= right_input_end)
     {
+        printf("left_input: %i, Right_input: %i\n",left_input[left_input_index],right_input[right_input_index]);
         if (left_input[left_input_index] < right_input[right_input_index])
         {
            printf("adding %i at index %i to merged_array left_input\n", left_input[left_input_index],left_input_index);
            merged_array.push_back(left_input[left_input_index]);
            left_input_index +=1;
-        } //enf of if statement swap for merge
+        } //end of if statement swap for merge
         else 
         {
             printf("adding %i at index %i to merged_array right_input\n", right_input[right_input_index] ,right_input_index);
@@ -88,7 +89,7 @@ std::vector<int> merge(std::vector<int> left_input, std::vector<int> right_input
         merged_array.push_back(left_input[left_input_index]);
         left_input_index += 1;
     }
-     printf("While right_input_index <= right_input_end only\n");
+    printf("While right_input_index <= right_input_end only\n");
     while (right_input_index <= right_input_end){
         printf("adding %i at index %i to merged_array right_input\n", right_input[right_input_index] ,right_input_index);
         merged_array.push_back(right_input[right_input_index]);
@@ -101,6 +102,7 @@ std::vector<int> merge(std::vector<int> left_input, std::vector<int> right_input
     for (int i = 0; i < merged_array.size(); i++){
         printf("array at %i: %i \n", i, merged_array[i]);
     }
+
     return merged_array;
 }
 
