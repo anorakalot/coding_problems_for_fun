@@ -7,24 +7,33 @@
 int main(){
 	//gonna use for starting length of array 
     //unsigned int n;
-	int n;//n is number of inputs
+	//int n;//n is number of inputs
 	//std::cin >> n; 
-    scanf("%i", &n);
+    //scanf("%i", &n);
    
     //std::vector<int> array(n);
-    std::vector<float> array(n); 
+    std::vector<float> array; 
 
     float input;
-    for (int i = 0; i < n; i++){
+    char exit_code;
+    //int input_index = 0;
+    while(exit_code != 'z'){
+    //for (int i = 0; i < n; i++){
         //std::cin >> input; 
-        
+
         scanf("%f", &input);
-        array[i] = input;
+        printf("\ninputting: %f",input);
+        //array[input_index] = input;
+        array.push_back(input);  
+        //input_index +=1;
+        
+        scanf("%c",&exit_code);
+        printf("exit_code: %c\n",exit_code);
     }
- 
+    array.pop_back();
     printf("INPUTTED ARRAY  \n");
 
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < array.size(); i++){
         printf("array at %i: %f \n", i, array[i]);
     }
     
@@ -45,10 +54,13 @@ int main(){
             for (int x = i-1; x >= 0; x--){
                 printf("array[x]: %f \n",array[x]);
                 if (key_value < array[x]){
-                    printf("key value less than array[x]\n");    
-                    array[key_index] = array[x];
+                    printf("key value less than array[x]\n");
 
+                    //sets key_index value to current array[x] value to move up the array[x] value
+                    array[key_index] = array[x];
+                    //insert key value in new spot if array[x] is biggger than key
                     array[x] = key_value;
+                    //set the new key_index to the correct spot
                     key_index = x; 
                 }
                 // else{
@@ -73,7 +85,7 @@ int main(){
     printf("\n");
     printf("After Sorting  \n");
 
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < array.size(); i++){
         printf("array at %i: %f \n", i, array[i]);
     }
     
