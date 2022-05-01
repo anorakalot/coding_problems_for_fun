@@ -3,9 +3,10 @@
 // Name: Richard McGee
 // Email: rmcge002@ucr.edu
 // 
-// Assignment name: 
-// Lab section: 
-// TA: 
+// Assignment name: Lab 02
+// Lab section: 021
+// TA: Fan, Quan
+// 
 // 
 // I hereby certify that I have not received assistance on this assignment,
 // or used code, from ANY outside source other than the instruction team
@@ -52,6 +53,6 @@ always @ ( posedge clk ) begin
     // Implement your synchronous reset
     result <= opcode == 1 ?  fixresult : floatresult ;//original line
     //result <= opcode == 0 ?  fixresult : floatresult ;
-
+    
 end 
 endmodule

@@ -3,7 +3,7 @@
 // Name: Richard McGee
 // Email: rmcge002@ucr.edu
 // 
-// Assignment name: Lab 02
+// Assignment name: Lab 03
 // Lab section: 021
 // TA: Fan, Quan
 // 
