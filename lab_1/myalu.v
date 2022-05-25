@@ -125,7 +125,7 @@ if (opcode == 3'b100 || opcode == 3'b101 || opcode == 3'b110 || opcode ==3'b111)
     carryout = 0;
     overflow = 0;
 end 
-
+//I LOVE APPLES;
 // if (overflow != 1'b0 && overflow != 1'b1)begin 
 //     overflow = 1'b1;
 //     end 
