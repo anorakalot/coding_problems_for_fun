@@ -4,49 +4,67 @@ public:
 //         map<int,bool> int_to_bool;
         
         int num_non_recur = nums.size();
-        printf("num_non_recur = %i\n\n",num_non_recur);
+        printf("num_non_recur (at start) = %i\n\n",num_non_recur);
         if (num_non_recur == 1){//to handle outlier case of 1 
             return num_non_recur;
         }
         for (int x =0; x < nums.size(); x++){
+            printf("current x = %i\n",x);
+            printf("current nums[x] = %i\n",nums[x]);
+            printf("inside of for loop\n");
             if (nums[x] == -101){
+                printf("inside if nums[x] == -101\n");
                 break;
             }
             //printf("%i\n",nums[x]);
-            if (nums[x] == nums[x+1]){
-                if (nums[x] != -101){
-                    num_non_recur -=1;
-                }
-                //it's picking up zeroes at the end that's why num-non_recur keeps
-                //getting lowered
-                printf("(in_btw) num_non_recur = %i\n\n",num_non_recur);
-                //nums[x+1] = NULL;
-                nums[x+1] = -101;
-                for (int y = x+1; y < nums.size(); y++){
-                    printf("test_1\n");
-                    if (y == nums.size()-1){
-                        break;
+            int z = x-1;
+            printf("x-1 = %i\n",z);
+            printf("test_3\n");
+            if (x+1 <=nums.size()-1){//make sure in range of nums[x+1] comparison
+                printf("test_5\n");
+                if (nums[x] == nums[x+1]){
+                    printf("inside if nums[x] == nums[x+1] \n");
+                    if (nums[x] != -101){
+                        num_non_recur -=1;
                     }
-                    nums[y] =nums[y+1];//error is here stops at test 1
-                    printf("test_2\n");
-                    //nums[y+1] = NULL;
-                    nums[y+1] = -101;
-                }
-                
-            }//end of if 
-            else if (nums[x] == nums[x-1]){
-                if (nums[x] != -101){
-                num_non_recur -=1;
-                }
-                //nums[x] = NULL;
-                nums[x] = -101;
-                for (int y = x;y< nums.size(); y++){
-                    nums[y] = nums[y+1];
-                    //nums[y+1] = NULL;
-                    nums[y+1] = -101;
-                }
-                
-            }//end of else if
+                    //it's picking up zeroes at the end that's why num-non_recur keeps
+                    //getting lowered
+                    printf("(in_btw) num_non_recur = %i\n\n",num_non_recur);
+                    //nums[x+1] = NULL;
+                    nums[x+1] = -101;
+                    for (int y = x+1; y < nums.size(); y++){
+                        printf("test_1\n");
+                        if (y == nums.size()-1){
+                            break;
+                        }
+                        nums[y] =nums[y+1];//error is here stops at test 1
+                        printf("test_2\n");
+                        //nums[y+1] = NULL;
+                        nums[y+1] = -101;
+                    }
+
+                }//end of if nums[x] == nums[x+1]
+            }
+           //problem is else if not letting it go into this other comparison
+            //else if (x-1 >= 0){//make sure there's range for nums[x-1] comparison
+             if (x-1 >= 0){//make sure there's range for nums[x-1] comparison
+                printf("test 6\n");
+                if (nums[x] == nums[x-1]){//bug is here [1,2]
+                    printf("inside if nums[x] == nums[x-1]\n");
+                    if (nums[x] != -101){
+                    num_non_recur -=1;
+                    }
+                    //nums[x] = NULL;
+                    nums[x] = -101;
+                    for (int y = x;y< nums.size(); y++){
+                        nums[y] = nums[y+1];
+                        //nums[y+1] = NULL;
+                        nums[y+1] = -101;
+                    }
+
+                }//end of else if
+            }
+            printf("test_4\n");
             printf("DEBUG FOR LOOP\n");
             for (int z = 0; z < nums.size(); z++){
                 printf("%i ",nums[z]);
@@ -55,7 +73,7 @@ public:
             printf("END OF DEBUG LOOP\n");
             
         }//end of for loop
-        printf("num_non_recur = %i",num_non_recur);
+        printf("num_non_recur (at end) = %i",num_non_recur);
         return num_non_recur;
     }
 };
