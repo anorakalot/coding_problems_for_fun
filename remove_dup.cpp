@@ -8,6 +8,7 @@ public:
         if (num_non_recur == 1){//to handle outlier case of 1 
             return num_non_recur;
         }
+        int only_one = 0;
         for (int x =0; x < nums.size(); x++){
             printf("current x = %i\n",x);
             printf("current nums[x] = %i\n",nums[x]);
@@ -23,6 +24,9 @@ public:
             if (x+1 <=nums.size()-1){//make sure in range of nums[x+1] comparison
                 printf("test_5\n");
                 if (nums[x] == nums[x+1]){
+                    // if (only_one == 0){
+                    // only_one = 1;
+                
                     printf("inside if nums[x] == nums[x+1] \n");
                     if (nums[x] != -101){
                         num_non_recur -=1;
@@ -32,7 +36,7 @@ public:
                     printf("(in_btw) num_non_recur = %i\n\n",num_non_recur);
                     //nums[x+1] = NULL;
                     nums[x+1] = -101;
-                    for (int y = x+1; y < nums.size(); y++){
+                    for (int y = x+1; y < nums.size()-1; y++){
                         printf("test_1\n");
                         if (y == nums.size()-1){
                             break;
@@ -42,27 +46,44 @@ public:
                         //nums[y+1] = NULL;
                         nums[y+1] = -101;
                     }
-
+                        printf("DEBUG FOR LOOP IN X+1 COMP\n");
+                        for (int z = 0; z < nums.size(); z++){
+                            printf("%i ",nums[z]);
+                        }
+                        printf("\n\n");
+                        printf("END OF DEBUG LOOP IN X+1 COMP\n");
                 }//end of if nums[x] == nums[x+1]
+                //}
             }
            //problem is else if not letting it go into this other comparison
             //else if (x-1 >= 0){//make sure there's range for nums[x-1] comparison
              if (x-1 >= 0){//make sure there's range for nums[x-1] comparison
                 printf("test 6\n");
+             
                 if (nums[x] == nums[x-1]){//bug is here [1,2]
+                    // if (only_one == 0){
+                    // only_one = 1;
                     printf("inside if nums[x] == nums[x-1]\n");
+                    printf("current x %i\n ",x);
                     if (nums[x] != -101){
                     num_non_recur -=1;
                     }
                     //nums[x] = NULL;
                     nums[x] = -101;
-                    for (int y = x;y< nums.size(); y++){
+                    for (int y = x;y< nums.size()-1; y++){
+                        printf("inside x-1 comp for loop restructuring vector\n");
                         nums[y] = nums[y+1];
                         //nums[y+1] = NULL;
                         nums[y+1] = -101;
                     }
-
+                printf("DEBUG FOR LOOP IN X-1 COMP\n");
+                for (int z = 0; z < nums.size(); z++){
+                    printf("%i ",nums[z]);
+                }
+                printf("\n\n");
+                printf("END OF DEBUG LOOP IN X-1 COMP\n");
                 }//end of else if
+                //}
             }
             printf("test_4\n");
             printf("DEBUG FOR LOOP\n");
@@ -71,7 +92,7 @@ public:
             }
             printf("\n\n");
             printf("END OF DEBUG LOOP\n");
-            
+            //only_one = 0;
         }//end of for loop
         printf("num_non_recur (at end) = %i",num_non_recur);
         return num_non_recur;
