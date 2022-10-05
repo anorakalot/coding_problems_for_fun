@@ -8,8 +8,12 @@ public:
         if (num_non_recur == 1){//to handle outlier case of 1 
             return num_non_recur;
         }
-        int only_one = 0;
+        //int only_one = 0;
+        //int if_odd = 0;
+        int redo_once = 0;
+        
         for (int x =0; x < nums.size(); x++){
+            
             printf("current x = %i\n",x);
             printf("current nums[x] = %i\n",nums[x]);
             printf("inside of for loop\n");
@@ -19,7 +23,7 @@ public:
             }
             //printf("%i\n",nums[x]);
             int z = x-1;
-            printf("x-1 = %i\n",z);
+            //printf("x-1 = %i\n",z);
             printf("test_3\n");
             if (x+1 <=nums.size()-1){//make sure in range of nums[x+1] comparison
                 printf("test_5\n");
@@ -93,6 +97,13 @@ public:
             printf("\n\n");
             printf("END OF DEBUG LOOP\n");
             //only_one = 0;
+            if (redo_once ==1){
+                redo_once = 0;
+            }
+            else if (redo_once ==0){
+                x=x-1;
+                redo_once = 1;
+            }
         }//end of for loop
         printf("num_non_recur (at end) = %i",num_non_recur);
         return num_non_recur;
