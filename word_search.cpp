@@ -13,7 +13,20 @@ public:
         int x_save_space =0;
         int y_save_space = 0;
         
-
+        printf("right before vector pair\n");
+        //map<pair<int,int>,int> check_if_already_used;
+        vector<pair<int,int>> prev_used;//variable to use to check if neighbor has already been used
+        printf("right after vector pair\n");
+        //prev_used[0].first = 2;
+        //prev_used[0].second = 9;
+        prev_used.push_back(make_pair(2,9));
+        
+        printf("prev_used[0].first = %i, prev_used[0].second = %i\n",prev_used[0].first,prev_used[0].second);
+        prev_used.clear();
+        printf("prev_used[0].first = %i, prev_used[0].second = %i\n",prev_used[0].first,prev_used[0].second);
+            
+        //debug testing map,pair
+        
         
         int word_index = 0;
         int found_first_letter =0;
