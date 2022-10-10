@@ -144,6 +144,8 @@ public:
                             x = x_save_space;
                             y = y_save_space;
                             do_multiple_times = 0;
+                            word_index = 1; //forgot to put this here which should fix bug 
+                            //of abcd being true when it should be false by resetting to first neighbor
                             continue;
                             //this way should go back and do available neighbor not done yet 
                             //due to only doing each available neighbor once due to map 
