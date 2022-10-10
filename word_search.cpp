@@ -45,7 +45,9 @@ public:
             }
             printf("\n");
         }
-        
+        int save_mult_opts_y;
+        int save_mult_opts_x;
+        int do_multiple_times = 0;
         
         int word_index = 0;
         int found_first_letter =0;
@@ -54,16 +56,22 @@ public:
         for (int y = 0; y < board.size(); y++){
             for (int x = 0; x < board[y].size(); x++){
                 if (board[y][x] == word[0]){//if it finds the first letter in the word sequence
+                    do_multiple_times = 1;
                     printf("Found first letter\n");
                     printf("loc = %i,%i\n",y,x);
                     y_save_space = y;
                     x_save_space = x;
+                    
                     //set y x to prev_used
                     prev_used[{y,x}] = 1;
                     
                     found_first_letter =1;
                     word_index = 1;
                     valid_word = 1;
+                    if (word.size() == 1){
+                        //which means there's only one letter 
+                        return 1;
+                    }
                     while (valid_word == 1){//meaning while ongoing word is valid keep going if not go back to 
                                             //x_save_space and y_save_space
                         if (x+1 <board[y].size()){
@@ -130,7 +138,16 @@ public:
                         }
                         }
                         
-                        
+                        //have it go back to original starting point to go 
+                        if (do_multiple_times == 1){
+                            
+                            x = x_save_space;
+                            y = y_save_space;
+                            do_multiple_times = 0;
+                            continue;
+                            //this way should go back and do available neighbor not done yet 
+                            //due to only doing each available neighbor once due to map 
+                        }
                         //else{//probably is this else statement because it could be y-1 >=0 and still find no
                              //other neighbors
                             
@@ -167,6 +184,11 @@ public:
                   //also this might be good because if doesn't return0
     }
 };
+//next issue is when for "aab" where if you go to the wrong next neighbor that doesn't have the final 
+//word near it how do I make sure ti goes back and chooses the other option
+//maybe make it save intermiediate space if more than one nieghbor is available
+
+
 //next issue is I have to take into account can't use the same letter cell more than once 
 //possible have a map that checks if a ceertain y,x value has been used already.
 
