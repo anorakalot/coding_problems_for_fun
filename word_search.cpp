@@ -13,20 +13,17 @@ public:
         int x_save_space =0;
         int y_save_space = 0;
         
-        printf("right before vector pair\n");
-        //map<pair<int,int>,int> check_if_already_used;
-        vector<pair<int,int>> prev_used;//variable to use to check if neighbor has already been used
-        printf("right after vector pair\n");
-        //prev_used[0].first = 2;
-        //prev_used[0].second = 9;
-        prev_used.push_back(make_pair(2,9));
-        
-        printf("prev_used[0].first = %i, prev_used[0].second = %i\n",prev_used[0].first,prev_used[0].second);
-        prev_used.clear();
-        printf("prev_used[0].first = %i, prev_used[0].second = %i\n",prev_used[0].first,prev_used[0].second);
-            
+               
         //debug testing map,pair
+        map<pair<int,int>,int> prev_used;
+        prev_used.insert({{2,9},1});
+        printf("prev_used key of 2,9 = %i\n",prev_used[{2,9}]);
+        prev_used.clear();
+        printf("after clear\n");
         
+        printf("prev_used key of 2,9 = %i\n",prev_used[{2,9}]);
+        prev_used.insert({{2,9},1});//need to test how to change value with this line if it works
+        printf("prev_used key of 2,9 = %i\n",prev_used[{2,9}]);
         
         int word_index = 0;
         int found_first_letter =0;
@@ -38,7 +35,7 @@ public:
                     printf("Found first letter\n");
                     x_save_space = x;
                     y_save_space = y;
-
+                    
                     
                     found_first_letter =1;
                     word_index = 1;
@@ -46,11 +43,12 @@ public:
                     while (valid_word == 1){//meaning while ongoing word is valid keep going if not go back to 
                                             //x_save_space and y_save_space
                         if (x+1 <board[y].size()){
-                        if (board[y][x+1] == word[word_index]){
+                        if (board[y][x+1] == word[word_index] ){
                             
                             if(word_index == word.size()-1){//meaning at last part of the word
                                return 1; 
                             }
+                            
                             //y stays the same
                             x +=1;
                             
@@ -107,6 +105,7 @@ public:
                             y = y_save_space;
                             
                             valid_word = 0;
+                            //need to put vector clear here    
                         //}             
                     }//end of while valid word loop
                 }//end of if board[x][y] == word[0] matching letter to first letter in word
@@ -123,3 +122,39 @@ public:
 };
 //next issue is I have to take into account can't use the same letter cell more than once 
 //possible have a map that checks if a ceertain y,x value has been used already.
+
+
+// vector apprach here (doesn't work as well as a map apprach)
+//push back first //inside first if of finding first letter in search
+//prev_used.push_back(make_pair)
+//  printf("right before vector pair\n");
+//         //map<pair<int,int>,int> check_if_already_used;
+//         vector<pair<int,int>> prev_used;//variable to use to check if neighbor has already been used
+//         printf("right after vector pair\n");
+//         //prev_used[0].first = 2;
+//         //prev_used[0].second = 9;
+//         prev_used.push_back(make_pair(2,9));
+        
+//         printf("prev_used[0].first = %i, prev_used[0].second = %i\n",prev_used[0].first,prev_used[0].second);
+        //prev_used.clear();//doesn't work
+        //prev_used.erase(prev_used.begin(),prev_used.end());
+        //printf("prev_used.begin().first= %i\n",prev_used[0].first);
+        //prev_used.erase(prev_used.begin());//doesn't work to erase 
+        //prev_used.erase(prev_used[0]);//doesn't compile
+        //prev_used.clear();
+        
+        //works but is inefficient 
+        //prev_used[0].first = 0;
+        //prev_used[0].second=0;
+        
+//         printf("prev_used.size() = %i\n",prev_used.size());
+// //        prev_used.pop_back();
+//         prev_used.clear();
+//         prev_used.shrink_to_fit();//THIS WORKS
+//         printf("prev_used.size() = %i\n",prev_used.size());
+    
+//         printf("after erase\n");
+        
+        //still prints because popback just lowers size and doesn't destroy what was here in memory 
+        //so this is undefined behavior
+//        printf("prev_used[0].first = %i, prev_used[0].second = %i\n",prev_used[0].first,prev_used[0].second);
