@@ -16,14 +16,36 @@ public:
                
         //debug testing map,pair
         map<pair<int,int>,int> prev_used;
-        prev_used.insert({{2,9},1});
-        printf("prev_used key of 2,9 = %i\n",prev_used[{2,9}]);
-        prev_used.clear();
-        printf("after clear\n");
+//         prev_used.insert({{2,9},1});
+//         printf("prev_used key of 2,9 = %i\n",prev_used[{2,9}]);
+//         prev_used.clear();
+//         printf("after clear\n");
         
-        printf("prev_used key of 2,9 = %i\n",prev_used[{2,9}]);
-        prev_used.insert({{2,9},1});//need to test how to change value with this line if it works
-        printf("prev_used key of 2,9 = %i\n",prev_used[{2,9}]);
+//         printf("prev_used key of 2,9 = %i\n",prev_used[{2,9}]);
+        
+        
+        // prev_used.insert({{2,9},1});//need to test how to change value with this line if it works
+        //insert doesn't work since it'll just return the previous value insteead of changing it 
+        //if key-value is already in the map
+        // printf("prev_used key of 2,9 = %i\n",prev_used[{2,9}]);
+        
+        //what if made a key value already for each pair 
+        //so just need to access it each time instead of insert which doesn't work
+        for (int y = 0; y < board.size();y++){
+            for (int x= 0; x < board[y].size(); x++){
+              prev_used.insert({{y,x},0});  
+            }
+        }
+        //prev_used[{1,2}] = 1;
+        
+        printf("map key , value\n");
+        for (int y = 0; y < board.size();y++){
+            for (int x= 0; x < board[y].size(); x++){
+               printf(" (%i,%i),%i ",y,x,prev_used[{y,x}]);
+            }
+            printf("\n");
+        }
+        
         
         int word_index = 0;
         int found_first_letter =0;
@@ -33,9 +55,11 @@ public:
             for (int x = 0; x < board[y].size(); x++){
                 if (board[y][x] == word[0]){//if it finds the first letter in the word sequence
                     printf("Found first letter\n");
-                    x_save_space = x;
+                    printf("loc = %i,%i\n",y,x);
                     y_save_space = y;
-                    
+                    x_save_space = x;
+                    //set y x to prev_used
+                    prev_used[{y,x}] = 1;
                     
                     found_first_letter =1;
                     word_index = 1;
@@ -43,48 +67,64 @@ public:
                     while (valid_word == 1){//meaning while ongoing word is valid keep going if not go back to 
                                             //x_save_space and y_save_space
                         if (x+1 <board[y].size()){
-                        if (board[y][x+1] == word[word_index] ){
+                        if (board[y][x+1] == word[word_index] &&
+                           prev_used[{y,x+1}] == 0){
                             
                             if(word_index == word.size()-1){//meaning at last part of the word
                                return 1; 
                             }
-                            
+                          
                             //y stays the same
                             x +=1;
+                            
+                            //put into prev_used;
+                            prev_used[{y,x}] = 1;
                             
                             word_index +=1;
                             continue; //to avoid going into the other if statements below
                         }//end of y+1 
                         }
                         if (x-1 >=0){
-                        if (board[y][x-1] == word[word_index]){
+                        if (board[y][x-1] == word[word_index] && 
+                           prev_used[{y,x-1}] == 0){
                             if(word_index == word.size()-1){//meaning at last part of the word
                                return 1; 
                             }
                             //y stays the same
                             x -=1;
+                            //put into prev_used;
+                            prev_used[{y,x}] = 1;
+                            
                             word_index +=1;  
                             continue; //to avoid going into the other if statements below
                         }
                         }
                         if (y+1 < board.size()){
-                        if (board[y+1][x] == word[word_index]){
+                        if (board[y+1][x] == word[word_index]
+                           && prev_used[{y+1,x}] == 0){
                             if(word_index == word.size()-1){//meaning at last part of the word
                                return 1; 
                             }
                             y+=1;
                             //x stays the same
+                            //put into prev_used;
+                            prev_used[{y,x}] = 1;
+                            
                             word_index +=1;  
                             continue; //to avoid going into the other if statements below
                         }
                         }
                         if (y-1 >=0){
-                        if (board[y-1][x] == word[word_index]){
+                        if (board[y-1][x] == word[word_index]  &&
+                           prev_used[{y-1,x}] == 0){
                             if(word_index == word.size()-1){//meaning at last part of the word
                                return 1; 
                             }
                             y -=1;
                             //x stays the same
+                            //put into prev_used;
+                            prev_used[{y,x}] = 1;
+                            
                             word_index +=1;
                             continue; //to avoid going into the other if statements below
                         }
@@ -105,7 +145,14 @@ public:
                             y = y_save_space;
                             
                             valid_word = 0;
-                            //need to put vector clear here    
+                             
+                            //map clear loop (set all values to 0)
+                            for (int y = 0; y < board.size();y++){
+                                for (int x= 0; x < board[y].size(); x++){
+                                    prev_used[{y,x}] = 0;  
+                                }
+                            }//end of map clear loop
+                        
                         //}             
                     }//end of while valid word loop
                 }//end of if board[x][y] == word[0] matching letter to first letter in word
