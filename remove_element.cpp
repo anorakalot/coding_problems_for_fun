@@ -13,25 +13,32 @@ public:
 		int return_value = nums.size();
 		// keep pointers of each
 		printf("last_pointer = %i\n", last_pointer);
+		printf("return_value = %i\n", return_value);
 		// debug loop
 		printf("printing given vector\n");
 		for (int x = 0; x < nums.size(); x++)
 		{
-			printf("nums[%i]=%i\n", x, nums[x]);
+			printf("%i ", nums[x]);
 		}
+		printf("\n");
 		// move last_pointer down one incase val is there
-		printf("nums[last_pointer] == %i", nums[last_pointer]);
+		printf("nums[last_pointer] == %i\n", nums[last_pointer]);
 		while (nums[last_pointer] == val)
 		{
 			// if (nums[last_pointer] == val){
 			printf("inside while nums[last_pointer]==val\n");
 			last_pointer -= 1;
 			return_value -= 1; // still need to do this since still need to shorten if seeing a val
-			printf("last_pointer now equals =%i ", last_pointer);
-			printf("return_value now equals =%i ", return_value);
+			printf("last_pointer now equals =%i \n", last_pointer);
+			printf("return_value now equals =%i\n", return_value);
 			// continue;
 			// }
+			if (last_pointer < 0)
+			{
+				return 0;
+			}
 		}
+
 		// end of debug loop
 		// for (int x = 0; x < nums.size(); x++)
 		for (int x = 0; x < return_value; x++)
@@ -49,13 +56,21 @@ public:
 				// move last_pointer down by 1 so as to not switch the previous
 				// bad value
 				last_pointer -= 1;
+				printf("last_pointer now equals =%i \n", last_pointer);
+				printf("return_value now equals =%i\n", return_value);
 				printf("debug of array after swap\n");
 				for (int x = 0; x < nums.size(); x++)
 				{
-					printf("nums[%i]=%i\n", x, nums[x]);
+					printf("%i ", nums[x]);
 				}
+				printf("\n");
 			}
 		}
+		if (nums[last_pointer] == val)
+		{
+			return_value -= 1;
+		}
+
 		return return_value;
 	}
 };
