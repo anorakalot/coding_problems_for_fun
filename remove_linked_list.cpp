@@ -20,10 +20,40 @@ public:
 		ListNode *new_head;
 		new_head = removeNode(head, val);
 		if (new_head->val == val)
-		{
+		{ // is here for test cases like [7,7,7,7]//copy of previous if below
+			// that's commented out
+			printf("inside new_head->val == val\n");
+			printf("new_head->val == %i", new_head->val);
 			new_head = new_head->next;
+			// head = new_head->next;
 		}
-		return new_head;
+		if (head->val == val)
+		{
+			printf("inside head->val == val\n");
+			printf("head->val == %i ", head->val);
+			head = new_head;
+		}
+
+		else
+		{
+			// nothing stays the same
+		}
+
+		// if (new_head->val == val){//is here for test cases like [7,7,7,7]
+		//     printf("inside new_head->val == val\n");
+		//     printf("new_head->val == %i",new_head->val);
+		//     new_head = new_head->next;
+		// }
+		// //if (new_head->val != head->val && head->val != val){
+		// else if (new_head->val != head->val){//to handle edge case unvalid val is right next to head
+		//     //problem is doesn't actually go into this for [1,2] testcase and I would assume all
+		//     //other test cases with head right next to val that needs to be removed
+		//     printf("inside new_head->val != head->val");
+		//     new_head = head;
+		// }
+
+		// return new_head;
+		return head;
 	}
 	ListNode *removeNode(ListNode *ptr, int val)
 	{
@@ -61,8 +91,8 @@ public:
 			ptr->next = return_node->next;
 			// return ptr;
 			return return_node; // that way keep using return_node if needed
-			// not good if  only one other thing
-			// return return_node->
+								// not good if  only one other thing
+								// return return_node->
 		}
 		else
 		{
@@ -70,7 +100,7 @@ public:
 
 			// return ptr->next;//with this it was 2345
 			return ptr; // this gives the valid
-			// return ptr is used to be used as next valid return_node point
+						// return ptr is used to be used as next valid return_node point
 		}
 		//         //return removeNode(ptr->next,val);
 		//         if (ptr->val == val){
