@@ -13,6 +13,10 @@ class Solution
 public:
 	ListNode *removeElements(ListNode *head, int val)
 	{
+		if (head == NULL)
+		{
+			return 0;
+		}
 		ListNode *new_head;
 		new_head = removeNode(head, val);
 		return new_head;
