@@ -32,16 +32,22 @@ public:
 		return_node = removeNode(ptr->next, val);
 		printf("return_node->val = %i\n", return_node->val);
 		printf("ptr->val = %i\n", ptr->val);
-		if (return_node->val == val)
+		if (ptr->next->val == val)
 		{
-			printf("inside return_node->val == val \n");
+			// if (return_node->val == val){
+			printf("inside ptr->next->val == val\n ");
+			// printf("inside return_node->val == val \n");
 			printf("ptr->next->val = %i\n", ptr->next->val);
-			return ptr->next;
+			// return ptr->next;
+			ptr->next = ptr->next->next;
+			return ptr;
 			// return return_node->
 		}
 		else
 		{
 			printf("inside else statement\n");
+
+			// return ptr->next;//with this it was 2345
 			return ptr;
 		}
 		//         //return removeNode(ptr->next,val);
