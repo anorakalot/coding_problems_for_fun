@@ -19,15 +19,38 @@ public:
 	}
 	ListNode *removeNode(ListNode *ptr, int val)
 	{
+		// if (ptr->val == 0){
 		if (ptr->next == nullptr)
 		{
 			printf("ptr->val = %i\n", ptr->val);
+			printf("meaning at base case \n");
 			return ptr;
 		}
+
 		// else{
+		ListNode *return_node;
+		return_node = removeNode(ptr->next, val);
+		printf("return_node->val = %i\n", return_node->val);
+		printf("ptr->val = %i\n", ptr->val);
+		if (return_node->val == val)
+		{
+			printf("inside return_node->val == val \n");
+			printf("ptr->next->val = %i\n", ptr->next->val);
+			return ptr->next;
+			// return return_node->
+		}
+		else
+		{
+			printf("inside else statement\n");
+			return ptr;
+		}
+		//         //return removeNode(ptr->next,val);
+		//         if (ptr->val == val){
+		//           return removeNode(ptr,val) ;
+		//         }
+		//         //}
+		//         else{
 
-		return removeNode(ptr->next, val);
-
-		//}
+		//         }
 	}
 };
