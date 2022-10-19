@@ -19,6 +19,10 @@ public:
 		}
 		ListNode *new_head;
 		new_head = removeNode(head, val);
+		if (new_head->val == val)
+		{
+			new_head = new_head->next;
+		}
 		return new_head;
 	}
 	ListNode *removeNode(ListNode *ptr, int val)
@@ -29,13 +33,23 @@ public:
 			printf("ptr->val = %i\n", ptr->val);
 			printf("meaning at base case \n");
 			return ptr;
+			// return ptr->next;
 		}
 
 		// else{
 		ListNode *return_node;
 		return_node = removeNode(ptr->next, val);
-		printf("return_node->val = %i\n", return_node->val);
+		if (return_node != nullptr)
+		{
+			printf("return_node->val = %i\n", return_node->val);
+		}
+		else
+		{
+			printf("return_node is null ptr\n");
+		}
+
 		printf("ptr->val = %i\n", ptr->val);
+		// if (ptr->val == val){
 		if (ptr->next->val == val)
 		{
 			// if (return_node->val == val){
@@ -43,8 +57,11 @@ public:
 			// printf("inside return_node->val == val \n");
 			printf("ptr->next->val = %i\n", ptr->next->val);
 			// return ptr->next;
-			ptr->next = ptr->next->next;
-			return ptr;
+			// ptr->next = ptr->next->next;
+			ptr->next = return_node->next;
+			// return ptr;
+			return return_node; // that way keep using return_node if needed
+			// not good if  only one other thing
 			// return return_node->
 		}
 		else
@@ -52,7 +69,8 @@ public:
 			printf("inside else statement\n");
 
 			// return ptr->next;//with this it was 2345
-			return ptr;
+			return ptr; // this gives the valid
+			// return ptr is used to be used as next valid return_node point
 		}
 		//         //return removeNode(ptr->next,val);
 		//         if (ptr->val == val){
