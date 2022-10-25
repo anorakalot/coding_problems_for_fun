@@ -21,13 +21,22 @@ public:
 			return root;
 		}
 
+		if (root->left == NULL && root->right == NULL)
+		{
+			// TreeNode* empty_val;
+			// empty_val->val = 0;
+			// printf("empty_val->val == %i\n",empty_val->val);
+			// empty_val->val = 0;
+			return root;
+		}
+
 		// if (root->left != nullptr){
 		if (root->left != NULL)
 		{
 			printf("if root->left != null\n");
 			return_val = searchBST(root->left, val);
 			if (return_val->val == val)
-			{
+			{ // return_val != NULL &&
 				return return_val;
 			}
 		}
@@ -40,6 +49,13 @@ public:
 				return return_val;
 			}
 		}
+		//         if (return_val->val !=val){
+		//             return NULL;
+		//         }
+		//         else{
+		//         return return_val;
+
+		//         }
 		return return_val;
 	}
 };
