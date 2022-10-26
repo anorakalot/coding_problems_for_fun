@@ -14,6 +14,20 @@ class Solution
 public:
 	TreeNode *searchBST(TreeNode *root, int val)
 	{
+		TreeNode *return_val_bst;
+		return_val_bst = searchBST_recur(root, val);
+
+		if (return_val_bst->val != val)
+		{
+			return NULL;
+		}
+		else
+		{
+			return return_val_bst;
+		}
+	}
+	TreeNode *searchBST_recur(TreeNode *root, int val)
+	{
 		TreeNode *return_val;
 		if (root->val == val)
 		{
@@ -34,7 +48,7 @@ public:
 		if (root->left != NULL)
 		{
 			printf("if root->left != null\n");
-			return_val = searchBST(root->left, val);
+			return_val = searchBST_recur(root->left, val);
 			if (return_val->val == val)
 			{ // return_val != NULL &&
 				return return_val;
@@ -43,7 +57,7 @@ public:
 		if (root->right != nullptr)
 		{
 			printf("if root->right != null\n");
-			return_val = searchBST(root->right, val);
+			return_val = searchBST_recur(root->right, val);
 			if (return_val->val == val)
 			{
 				return return_val;
