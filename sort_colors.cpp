@@ -37,7 +37,9 @@ public:
 		printf("\n\n");
 		printf("low = %i, high = %i\n", low, high);
 		printf("nums before partition\n");
-		for (int x = 0; x <= high; x++)
+		// for (int x = 0; x <= high; x++)
+		for (int x = low; x <= high; x++) // this way easier to see what is being done in
+										  // particular partition
 		{
 			printf("%i ", nums[x]);
 		}
@@ -45,41 +47,43 @@ public:
 		// int i = low - 1; // so -1 if low was 0
 		//  which it should be for first partition
 		int i = low;
+		i = i - 1;
 		// i -=1;
 		// stops here w/ new runtime error if i= low-1 or i-=1 2 line approach
 
 		// gonna try adding a int bool variable to keep i at low value once
 		// and skip i+= 1 once
-		int low_once = 0;
-		printf("i starting_val = %i,nums[i] = %i", i, nums[i]);
-		// int j;//don't need this if I have x for loop value
+		// int low_once = 0;
+		printf("i starting_val = %i\n", i); //,nums[i] = %i",i,nums[i]);
+											// foudn the error it's due to nums[i] above and -1 not being a valid index
+		//  int j;//don't need this if I have x for loop value
 		int pivot = high; // just make it the right most index value
 						  // for simplicity
 		printf("pivot == %i\n", pivot);
 		printf("pivot[nums] == %i\n", nums[pivot]);
 		int swap = 0;
-		for (int x = 0; x <= high; x++)
+		for (int x = low; x <= high; x++)
 		{
-			printf("nums[x] == %i\n", nums[x]);
 			printf("x == %i\n", x);
+			printf("nums[x] == %i\n", nums[x]);
 			// j=x;
 			if (nums[x] <= nums[pivot])
 			{
-				printf("swapping\n");
-				printf("nums[x] == %i\n", nums[x]);
-				printf("nums[pivot] == %i\n", nums[pivot]);
+				printf("nums[x] <= nums[pivot]\n");
+				// printf("swapping\n");
+				// printf("nums[x] == %i\n", nums[x]);
+				printf("x == %i, nums[x] == %i\n", x, nums[x]);
+				printf("pivot = %i nums[pivot] == %i\n", pivot, nums[pivot]);
 				// if (i != low){}
-				if (low_once == 0)
-				{ // first time i
-					// does not need to get incrememnted if start at i = low
-					low_once = 1;
-				}
-				else
-				{
-					i += 1; // increment i by 1
-				}
-				// i += 1; // increment i by 1
-
+				//  if (low_once == 0){//first time i
+				//  //does not need to get incrememnted if start at i = low
+				//  low_once = 1;
+				//  }
+				//  else{
+				//  i += 1; // increment i by 1
+				//  }
+				i += 1; // increment i by 1
+				printf("i after increment == %i\n", i);
 				if (i == x)
 				{
 					// continue;
@@ -88,8 +92,11 @@ public:
 				}
 				else if (x > i)
 				{
-					printf("nums[i] (after +=1) == %i\n", nums[i]);
-					printf("i == %i\n", i);
+					// printf("nums[i] (after +=1) == %i\n", nums[i]);
+					// printf("i == %i\n",i);
+					printf("act. swapping\n");
+					printf("i == %i, nums[i]== %i\n", i, nums[i]);
+					printf("x == %i, nums[x] == %i\n", x, nums[x]);
 					// printf("\n");
 					//  now swap i and j
 					swap = nums[x];
@@ -99,7 +106,8 @@ public:
 			} // if (nums[x] <= pivot)
 			else
 			{
-				printf("not in nums[x] < nums[pivot]\n");
+				// printf("not in nums[x] < nums[pivot]\n");
+				printf("nums[x] > pivot\n");
 			}
 		}
 		// once at the end swap i+1 and pivot index
@@ -119,7 +127,9 @@ public:
 		//(Ignore this I think)reason see change is due to this swap here with pivot and i+1
 
 		printf("nums after partition\n");
-		for (int x = 0; x <= high; x++)
+		// for (int x = 0; x <= high; x++)
+		for (int x = low; x <= high; x++) // this way easier to see what is being done in
+										  //  this particular partition
 		{
 			printf("%i ", nums[x]);
 		}
@@ -139,3 +149,6 @@ public:
 
 // issue I see is that returned pivot val at the end is 9 when it shouldn't ever
 // go past 5 which is the last index for the array size for the test array 202110
+
+// I FIXED THE ERROR IT WAS JUST THE MAIN PARTITION LOOP
+// WAS SET TO O TO HIGH AND NOT LOW TO HIGH
