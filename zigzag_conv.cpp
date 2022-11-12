@@ -78,13 +78,14 @@ public:
 
 		// put debug print loop here
 		printf("LOOP that adds space values default to zigzag_conv\n");
-		for (int y = 0; y < numRows - 1; y++)
+		for (int y = 0; y <= numRows - 1; y++)
 		{
-			for (int x = 0; x < numColumns - 1; x++)
+			for (int x = 0; x <= numColumns - 1; x++)
 			{
+				printf("y == %i , x == %i\n", y, x);
 				printf("testing\n");
-				zigzag_conv[y][x] = ' ';
-				printf("%c ", zigzag_conv[y][x]);
+				zigzag_conv[y][x] = '0';
+				printf("%c \n", zigzag_conv[y][x]);
 			}
 			printf("\n");
 		}
@@ -139,7 +140,8 @@ public:
 				if (num_position > 0)
 				{
 					num_position -= 1;
-					numColumns += 1;
+					// numColumns +=1;//THIS WAS THE LINE CAUSDING THE ISSUE
+					// SINCE THIS IS NOT THE FINDING COLUMNS LOOP THAT ALREADY HAPPENED IN THE PREV ONE
 					s_size -= 1;
 					s_index += 1;
 					// y_val goes up (meaning decrease in 2d array)
@@ -163,18 +165,35 @@ public:
 
 		// put debug print loop here
 		printf("DEBUG LOOP\n");
-		for (int y = 0; y < numRows - 1; y++)
+		for (int y = 0; y <= numRows - 1; y++)
 		{
-			for (int x = 0; x < numColumns - 1; x++)
+			for (int x = 0; x <= numColumns - 1; x++)
 			{
+				printf("y == %i , x == %i\n", y, x);
 				printf("testing\n");
+				printf("%c \n", zigzag_conv[y][x]);
+			}
+			printf("\n");
+		}
+		printf("\n\n");
+		printf("print out 2d array loop and add to return_val loop\n");
+		for (int y = 0; y <= numRows - 1; y++)
+		{
+			for (int x = 0; x <= numColumns - 1; x++)
+			{
 				printf("%c ", zigzag_conv[y][x]);
+				if (zigzag_conv[y][x] != '0')
+				{
+					return_val.push_back(zigzag_conv[y][x]);
+				}
 			}
 			printf("\n");
 		}
 
+		std::cout << "return_val==" << return_val << std::endl;
 		// actually ending might be a double for loop to go through and only add the values in a linear fashion after makign a zigzag pattern
-		return "0";
+		// return "0";//placeholder
+		return return_val;
 
 	} // end of convert class function
 };
