@@ -75,6 +75,20 @@ public:
 		// should find mathematical way to get num of columns
 		// y      x
 		char zigzag_conv[numRows][numColumns];
+
+		// put debug print loop here
+		printf("LOOP that adds space values default to zigzag_conv\n");
+		for (int y = 0; y < numRows - 1; y++)
+		{
+			for (int x = 0; x < numColumns - 1; x++)
+			{
+				printf("testing\n");
+				zigzag_conv[y][x] = ' ';
+				printf("%c ", zigzag_conv[y][x]);
+			}
+			printf("\n");
+		}
+
 		string return_val;
 		int y_val = 0;
 		int x_val = 0;
