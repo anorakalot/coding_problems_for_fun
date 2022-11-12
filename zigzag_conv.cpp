@@ -17,6 +17,10 @@ public:
 		{
 			return s;
 		}
+		if (numRows == 1)
+		{
+			return s;
+		}
 		// vector<vector<char>> zigzag_conv;
 
 		// int num_in_between = numrows/2;
