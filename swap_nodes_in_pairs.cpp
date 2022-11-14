@@ -39,9 +39,11 @@ public:
 		}
 		ListNode *return_val_recur;
 		when_to_swap_val += 1;
-		return_val_recur = swapPairs_recur(head->next, when_to_swap_val);
+		return_val_recur = swapPairs_recur(head->next, when_to_swap_val); // recursion call
+		printf("\n");
 		printf("when_to_swap_val == %i\n", when_to_swap_val);
 		printf("head->val == %i\n", head->val);
+		printf("head->next->val == %i\n", head->next->val);
 		printf("return_val_recur->val == %i\n", return_val_recur->val);
 		if (when_to_swap_val % 2 == 0)
 		{ // meaning it's even
@@ -49,6 +51,15 @@ public:
 			swap_node = return_val_recur->next;
 			return_val_recur->next = head;
 			head->next = swap_node;
+			return return_val_recur;
+		}
+		else
+		{ // it's odd
+			printf("odd meaning going to make next == to return_val_recur\n");
+			printf("since it's after a switch\n");
+			head->next = return_val_recur; // to make the previous node after a switch return to the
+										   // new swapped node
+			return head;
 		}
 		printf("\n");
 
