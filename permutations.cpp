@@ -4,7 +4,16 @@ public:
 	vector<vector<int>> permute(vector<int> &nums)
 	{
 		vector<vector<int>> return_val;
-
+		int num_of_permutations;
+		num_of_permutations = nums.size(); // start off 3
+		printf("start_val num_of_permutations = %i\n", num_of_permutations);
+		printf("nums.size()-1 = %i\n", nums.size() - 1);
+		for (int x = nums.size() - 1; x > 0; x--)
+		{
+			printf("x == %i \n", x);
+			num_of_permutations *= x;
+		}
+		printf("num_of_permutations = %i\n", num_of_permutations);
 		// testing_pushback
 		//  vector<int> test_1= {5,1,6,7,2,1};
 		//  vector<int> test_2 = {10,5,4,1};
@@ -18,15 +27,19 @@ public:
 		//  }
 		////
 		map<vector<int>, int> been_done_before;
-
 		return_val = permute_recur(nums, been_done_before, return_val);
-
 		return return_val;
 	}
 	vector<vector<int>> permute_recur(vector<int> &nums, map<vector<int>, int> been_done_before, vector<vector<int>> return_val)
 	{
 		if (been_done_before[nums] == 0)
 		{ // if nums hasn't been done_before
+			printf("UNIQUE PERMUTE NUMS\n");
+			for (int x = 0; x < nums.size(); x++)
+			{
+				printf("%i ", nums[x]);
+			}
+			printf("\n");
 			return_val.push_back(nums);
 			been_done_before[nums] = 1; // set it to 1 so that we know this permutation has already been done
 		}
