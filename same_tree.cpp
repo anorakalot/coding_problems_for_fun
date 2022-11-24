@@ -17,20 +17,31 @@ public:
 		vector<int> p_vals;
 		vector<int> q_vals;
 
-		preorder(p, p_vals);
+		vector<char> p_dirs;
+		vector<char> q_dirs;
+
+		preorder(p, p_vals, p_dirs);
 		// just testing
 		for (int x = 0; x < p_vals.size(); x++)
 		{
 			printf("p_vals %i\n", p_vals[x]);
 		}
+		for (int x = 0; x < p_dirs.size(); x++)
+		{
+			printf("p_dirs %c\n", p_dirs[x]);
+		}
 
-		preorder(q, q_vals);
+		preorder(q, q_vals, q_dirs);
 		for (int x = 0; x < q_vals.size(); x++)
 		{
 			printf("q_vals %i\n", q_vals[x]);
 		}
+		for (int x = 0; x < q_dirs.size(); x++)
+		{
+			printf("q_dirs %c\n", q_dirs[x]);
+		}
 
-		if (p_vals.size() != q_vals.size())
+		if (p_vals.size() != q_vals.size() || p_dirs.size() != q_dirs.size())
 		{
 			return 0; // not same size
 		}
@@ -43,27 +54,45 @@ public:
 			}
 		}
 
-		return 1; // placeholder
+		for (int x = 0; x < p_dirs.size(); x++)
+		{
+			if (p_dirs[x] != q_dirs[x])
+			{
+				return 0;
+			}
+		}
+		return 1;
 	}
 
-	void preorder(TreeNode *x, vector<int> &x_vals)
+	void preorder(TreeNode *x, vector<int> &x_vals, vector<char> &x_dirs)
 	{
-		printf("x->val == %i\n", x->val);
-		if (x->val == 0)
-		{
-			x_vals.push_back(0);
-		}
-		else
+		// printf("x->val == %i\n",x->val);
+
+		// if (x->val == 0){
+		//     x_vals.push_back(0);
+		// }
+		// else{
+		//    x_vals.push_back(x->val);
+		// }
+
+		if (x != NULL)
 		{
 			x_vals.push_back(x->val);
 		}
+		else if (x == NULL)
+		{
+			return;
+		}
+
 		if (x->left != nullptr)
 		{
-			preorder(x->left, x_vals);
+			x_dirs.push_back('l');
+			preorder(x->left, x_vals, x_dirs);
 		}
 		if (x->right != nullptr)
 		{
-			preorder(x->right, x_vals);
+			x_dirs.push_back('r');
+			preorder(x->right, x_vals, x_dirs);
 		}
 	}
 };
