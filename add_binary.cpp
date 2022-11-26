@@ -3,14 +3,8 @@ class Solution
 public:
 	string addBinary(string a, string b)
 	{
-		// int addition_bool=1;
-		// while (addition_bool ==1){
-		// }
-		// making one string the same size as the larger one is expensive
 		string return_val;
-		// int total_size;
-
-		// int bit_index;
+		int return_val_index;
 		int bit_index_a;
 		int bit_index_b;
 
@@ -22,14 +16,13 @@ public:
 
 		if (a.size() > b.size())
 		{
-			return_val.resize(a.size() + 1);
-			// bit_index = a.size()-1;
-			// total_size = a.size();
+			return_val.resize(a.size());
+			return_val_index = a.size() - 1;
 		}
 		else
 		{ // if it's equal or b is bigger just go w/ b size
-			return_val.resize(b.size() + 1);
-			// bit_index = b.size()-1;
+			return_val.resize(b.size());
+			return_val_index = b.size() - 1;
 		}
 
 		printf("a_bit_string\n");
@@ -47,29 +40,63 @@ public:
 		printf("\n");
 
 		int carry_over = 0;
-		int bit_value = 0;
-		while (bit_index > 0)
+		int carry_over_curr = 0;
+
+		// int bit_value = 0;
+		// char bit_value_char = '0';
+		char bit_value = '0';
+		// int bit_a = 0;
+		// int bit_b = 0;
+		char bit_a = '0';
+		char bit_b = '0';
+
+		while (bit_index_a >= 0 and bit_index_b >= 0)
 		{
 			bit_value = 0;
-			// actually below might not work since
-			// for '11' and '1' you start w/ the right 1 being the same index as the last 1 in the left one
-			//  if (a[bit_index] == ''){
-			//      a_val = '0';
-			//  }
-			//  if (b[bit_index == ''){
-			//      b_val = '0';
-			//  }
-			if (a[bit_index] == '1' && b[bit_index] == '1')
+			if (bit_index_a < 0)
+			{ // if no longer inside range for a
+				bit_a = 0;
+			}
+			else
 			{
-				carry_over += 1;
-				bit_value = 0;
+				bit_a = a[bit_index_a];
+			}
+			if (bit_index_b < 0)
+			{ // if no longer inside range for a
+				bit_b = 0;
+			}
+			else
+			{
+				bit_b = b[bit_index_b];
 			}
 
-			bit_index--;
+			// need to take care of bitvalue
+			if (bit_a == '1' && bit_b == '1')
+			{
+				// carry_over +=1;
+				carry_over_curr += 1;
+				bit_value = '0';
+			}
+			else if ((bit_a == '1' && bit_b == '0') || (bit_a == '0' && bit_b == '1'))
+			{
+				bit_value = '1';
+			}
+			else if (bit_a == '0' && bit_b == '0')
+			{
+				bit_value = '0';
+			}
+
+			if (carry_over > 0 && bit_value)
+			{ // one or more
+			}
+
+			bit_index_a--;
+			bit_index_b--;
 		}
-
-		//
-
+		// in below carry_over loop I'll have to insert at beginning of str
+		//  s.insert(0,"1");
+		// add while loop here for while carry_over >=1
+		// keep adding 1 to front of bit_string
 		return return_val;
 	}
 };
