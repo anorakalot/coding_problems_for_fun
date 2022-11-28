@@ -1,10 +1,9 @@
 class Solution
 {
 public:
-	int fib(int n, map<int, int> &already_done)
+	map<int, int> already_done;
+	int fib(int n)
 	{
-		// vector<int>& already_done //I'm gonna use a map instead
-		// 2 base cases (1,0)
 		if (n == 1)
 		{
 			return 1;
@@ -19,7 +18,7 @@ public:
 			return_val = already_done[n];
 			return return_val;
 		}
-		return_val = fib(n - 1, already_done) + fib(n - 2, already_done);
+		return_val = fib(n - 1) + fib(n - 2);
 		if (already_done[n] == 0)
 		{
 			already_done[n] = return_val;
@@ -27,3 +26,5 @@ public:
 		return return_val;
 	}
 };
+// vector<int>& already_done //I'm gonna use a map instead
+// 2 base cases (1,0)
