@@ -11,9 +11,13 @@ procedure Tic_Tac_Toe_Program is
    type y_col_index is range 0 .. 2;
    type x_row_index is range 0 .. 2;
 
+   y_input : y_col_index := 0;
+   x_input : x_row_index := 0;
+
    type Tic_tac_toe_board is array (y_col_index, x_row_index) of X_OR_O;
    board : Tic_tac_toe_board := ((NA, NA, NA), (NA, NA, NA), (NA, NA, NA));
    input : X_OR_O            := X;
+   check_win_cond_var : X_OR_O;
    --setting input to a x_or_o val at init fixed bug
 
    type GAME_STATES is (GAME_INIT,GAME_START,CHOOSE_X_O,
@@ -83,9 +87,62 @@ begin
          --  end case
    end case;
 
-  -- case game_state is --actions
-    --  when
-   --end case;
+   case game_state is --actions
+      when GAME_INIT =>
+         Put_Line("Game_init");
+      when GAME_START =>
+         Put_Line("Game Start");
+
+      when CHOOSE_X_O=>
+         Put_Line("Choose X or O ");
+         Get(input);
+         Put_Line("You chose " & X_OR_O'Image(input));
+      when CHOOSE_MOVE=>
+         display_board;
+         Put_Line("Enter Y_input (note 0 is top and 2 is bottom for 2d array)");
+         Get(y_input);
+         Put_Line("Enter x_input ");
+         Get(x_input);
+         Put_Line("y== " & y_col_index'Image ( y_input) & "x == " & x_col_index'Image(x_input));
+
+      when CHECK_IF_VALID_MOVE =>
+         --in here need to check if current input either x or o has already
+          --taken a spot in the tic tac toe board
+          if board(y_input,x_input) /= NA then
+             Put_Line("input is valid!");
+             valid_move_bool := 1;
+          else
+             Put_Line("input is NOT valid!");
+             valid_move_bool := 1;
+          end if;
+
+         --Now to actuall put input onto the board
+         Put_Line("putting input onto the board!");
+         board(y_input,x_input) := input;
+         display_board;
+      when CHECK_WIN=>
+         check_win_cond_var := board(0,0);
+         --probably best to do this in a algorithmic way since
+         -- if I need to scale up I can do it easier with this method
+         Put_Line ("checking row win condition");
+         valid_win_bool := 1;
+         for y in y_col_index loop
+            for x in x_col_index loop
+               if (board(y,x) /= check_win_cond_var) then
+                  valid_win_bool := 0;
+               end if;
+            end loop;
+            end loop;
+
+      when SWITCH_PLAYER=>
+         if (input = X) then
+            input := O;
+         elsif (input = O) then
+            input := X;
+         end if;
+      when GAME_OVER=>
+         Put_Line("Game_Over!");
+   end case;
 
 
 end Tic_Tac_Toe_Program;
