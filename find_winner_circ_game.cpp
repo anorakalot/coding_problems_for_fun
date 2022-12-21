@@ -9,9 +9,11 @@ public:
 
 	int findTheWinner(int n, int k)
 	{
+
 		// this is just to set up vector<int> the first time
 		if (first_time == 0)
 		{
+			printf("\n\n\n");
 			printf("inside first_time if statement \n");
 			for (int x = 0; x < n; x++)
 			{
@@ -41,8 +43,10 @@ public:
 		// need to take into account overflow
 		// if I used the size function more nthan this it would problably be best to cache
 		// the function so I only need to run the size() once
-		if (index > friends.size() - 1)
-		{ // if index
+		// if (index > friends.size()-1){//if index
+		// change to while so it keeps going until index is in right range
+		while (index > friends.size() - 1)
+		{
 			printf("in overflow if\n");
 			printf("(overflowed)index == %i \n", index);
 			overflow_val = (index - (friends.size() - 1)) - 1;
@@ -60,7 +64,7 @@ public:
 		{
 			printf("%i ", friends[x]);
 		}
-
+		printf("\n");
 		// set up recursive call for global variables
 		//  recursive call
 		return_val = findTheWinner(n, k);
