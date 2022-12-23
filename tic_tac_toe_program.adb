@@ -1,9 +1,12 @@
 with Ada.Text_IO; use Ada.Text_IO;
+--with Ada.Enumeration_IO; use Ada.Enumeration_IO;
 
 procedure Tic_Tac_Toe_Program is
    --input: Integer :=0; -- thjios is why there was a confl of decl error was beacuse this variable was
    --already being used for this input.
    --  X: Character := 'X';
+   char_input : Character :='X';
+   int_input : Integer := 0;
    type X_OR_O is
      (X, O, NA);--error was here because I think that - is a special characer
    --so for now just using NA
@@ -27,8 +30,10 @@ procedure Tic_Tac_Toe_Program is
    type valid_bool is range 0 .. 1;
    valid_move_bool : valid_bool :=0;
    valid_win_bool : valid_bool := 0;
+   valid_row_win_bool : valid_bool := 0;
+   valid_col_win_bool : valid_bool := 0;
    valid_row_check_bool : valid_bool :=0;
-
+   valid_col_check_bool : valid_bool :=0;
    procedure display_board is
    begin
       for y in y_col_index loop
@@ -95,7 +100,9 @@ begin
          Put_Line("Game Start");
       when CHOOSE_X_O=>
          Put_Line("Choose X or O ");
-         Get(input);
+         --Get(input);
+         Get(char_input);
+         input := X_OR_O'Val(char_input);
          Put_Line("You chose " & X_OR_O'Image(input));
       when CHOOSE_MOVE=>
          display_board;
@@ -107,27 +114,30 @@ begin
 
       when CHECK_IF_VALID_MOVE =>
          --in here need to check if current input either x or o has already
-          --taken a spot in the tic tac toe board
+         --taken a spot in the tic tac toe board
           if board(y_input,x_input) /= NA then
              Put_Line("input is valid!");
-             valid_move_bool := 1;
+             valid_move_bool := 1;--so it transitions to the next state correctly
+             --Now to actuall put input onto the board
+             Put_Line("putting input onto the board!");
+             board(y_input,x_input) := input;
+             display_board;
           else
              Put_Line("input is NOT valid!");
-             valid_move_bool := 1;
+             valid_move_bool := 0;--this needs to be zero
           end if;
 
-         --Now to actuall put input onto the board
-         Put_Line("putting input onto the board!");
-         board(y_input,x_input) := input;
-         display_board;
+
       when CHECK_WIN=>
          --check_win_cond_var := board(0,0);
          --probably best to do this in a algorithmic way since
          -- if I need to scale up I can do it easier with this method
          Put_Line ("checking row win condition");
-         valid_win_bool := 1;
+         valid_win_bool := 0;
+         valid_row_win_bool :=0;
          for y in y_col_index loop
             valid_row_check_bool := 1;
+            valid_row_win_bool := 1;
             check_win_cond_var := board(y,0);
             if (check_win_cond_var = NA) then
                valid_row_check_bool :=0;--if first value is NA then this row automatically isn't valid
@@ -136,10 +146,15 @@ begin
             --actually this might now work since if a value is NA and they are all NA then it would mistangly make it so
             for x in x_col_index loop
                if (valid_row_check_bool = 1) and (board(y,x) /= check_win_cond_var) then
-                  valid_win_bool := 0;
+                  valid_row_win_bool := 0;
                end if;
             end loop;
-            end loop;
+            if valid_row_win_bool = 1 then
+               valid_win_bool :=1;
+            end if;
+
+         end loop;
+
          --think there might be a logic issue with valid_win_bool above
       when SWITCH_PLAYER=>
          if (input = X) then
