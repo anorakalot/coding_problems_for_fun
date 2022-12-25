@@ -17,8 +17,12 @@ public:
 	// because it checks if it's the right address instead of just the value
 	// vector<vector<int>> return_val(vector<int>(100));
 	// vector<vector<int>> return_val(100,vector<int>(100));
-	vector<vector<int>> return_val;
-	vector<int> input_vector;
+	vector<vector<int>> return_val{1000, vector<int>(0)}; // doing brackets instead of
+	// 100,200
+	// parentheses fixed the missing parameter declaration error
+
+	// vector<int> input_vector;
+	int max_level = 0;
 
 	queue<TreeNode *> node_queue;
 	// vector<int> visited;//might have to take into account pos of nodes to make sure
@@ -47,6 +51,7 @@ public:
 		else
 		{
 			printf("in == Null else statement\n");
+			return_val.resize(0);
 			return return_val;
 		}
 
@@ -63,7 +68,12 @@ public:
 			printf("curr_node->val == %i\n", curr_node->val);
 			printf("level_for_node[curr_node] == %i\n\n", level_for_node[curr_node]);
 			level = level_for_node[curr_node];
-			// return_val[level].push_back(curr_node->val);
+			if (level > max_level)
+			{
+				max_level = level;
+			}
+			return_val[level].push_back(curr_node->val);
+
 			valid_left = 1;
 			// for neighbors just need to check left and right since it's a binary tree
 			if (curr_node->left != nullptr)
@@ -115,7 +125,9 @@ public:
 		// if (left != nullptr){
 		//     node_queue.push(root->left->val);
 		// }
-
+		printf("max_level = %i\n", max_level);
+		max_level += 1;
+		return_val.resize(max_level);
 		return return_val;
 	}
 };
