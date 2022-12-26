@@ -132,8 +132,8 @@ begin
          --check_win_cond_var := board(0,0);
          --probably best to do this in a algorithmic way since
          -- if I need to scale up I can do it easier with this method
-         Put_Line ("checking row win condition");
          valid_win_bool := 0;
+         Put_Line ("checking row win condition");
          valid_row_win_bool :=0;
          for y in y_col_index loop
             valid_row_check_bool := 1;
@@ -144,7 +144,7 @@ begin
                end if;
             --set it to the first element of x at a y value to check if they are all the same
             --actually this might now work since if a value is NA and they are all NA then it would mistangly make it so
-            for x in x_col_index loop
+            for x in x_row_index loop
                if (valid_row_check_bool = 1) and (board(y,x) /= check_win_cond_var) then
                   valid_row_win_bool := 0;
                end if;
@@ -152,8 +152,31 @@ begin
             if valid_row_win_bool = 1 then
                valid_win_bool :=1;
             end if;
-
          end loop;
+
+         --checking col win condition
+         Put_Line("checking col win condition");
+         if (valid_win_bool /= 1) then --meaning only if not found win in row
+           valid_win_bool :=0;
+         for x in x_row_index loop
+            valid_col_check_bool := 1;
+            valid_col_win_bool := 1;
+            check_win_cond_var := board(0,x);
+            if (check_win_cond_var = NA) then
+               valid_col_check_bool :=0;--if first value is NA then this row automatically isn't valid
+            end if;
+            --set it to the first element of x at a y value to check if they are all the same
+            --actually this might now work since if a value is NA and they are all NA then it would mistangly make it so
+            for y in y_col_index loop
+               if (valid_col_check_bool = 1) and (board(y,x) /= check_win_cond_var) then
+                  valid_col_win_bool := 0;
+               end if;
+            end loop;
+            if valid_col_win_bool = 1 then
+               valid_col_bool :=1;
+            end if;
+            end loop;
+            end if;
 
          --think there might be a logic issue with valid_win_bool above
       when SWITCH_PLAYER=>
