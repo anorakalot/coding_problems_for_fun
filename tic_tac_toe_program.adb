@@ -1,12 +1,13 @@
 with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 --with Ada.Enumeration_IO; use Ada.Enumeration_IO;
 
 procedure Tic_Tac_Toe_Program is
    --input: Integer :=0; -- thjios is why there was a confl of decl error was beacuse this variable was
    --already being used for this input.
    --  X: Character := 'X';
-   char_input : Character :='X';
-   int_input : Integer := 0;
+   char_input : Character;
+   int_input : Integer;
    type X_OR_O is
      (X, O, NA);--error was here because I think that - is a special characer
    --so for now just using NA
@@ -100,17 +101,21 @@ begin
          Put_Line("Game Start");
       when CHOOSE_X_O=>
          Put_Line("Choose X or O ");
-         --Get(input);
-         Get(char_input);
-         input := X_OR_O'Val(char_input);
+         Get(input);
+         --Get(char_input);
+         --input := X_OR_O(char_input);
          Put_Line("You chose " & X_OR_O'Image(input));
       when CHOOSE_MOVE=>
          display_board;
          Put_Line("Enter Y_input (note 0 is top and 2 is bottom for 2d array)");
-         Get(y_input);
+         --Get(y_input);
+         Get(int_input);
+         y_input := y_col_index(int_input);
          Put_Line("Enter x_input ");
-         Get(x_input);
-         Put_Line("y== " & y_col_index'Image ( y_input) & "x == " & x_col_index'Image(x_input));
+         --Get(x_input);
+         Get(int_input);
+         x_input := x_row_index(int_input);
+         Put_Line("y== " & y_col_index'Image ( y_input) & "x == " & x_row_index'Image(x_input));
 
       when CHECK_IF_VALID_MOVE =>
          --in here need to check if current input either x or o has already
