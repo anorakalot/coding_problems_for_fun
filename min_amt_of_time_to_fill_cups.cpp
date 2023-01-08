@@ -1,11 +1,9 @@
 class Solution
 {
 public:
-	bool cups_still_have_water = 1;
 	int num_of_seconds = 0;
 	int y;
 	int x;
-	int pq_size = 0;
 	int fillCups(vector<int> &amount)
 	{
 		priority_queue<int> pq;
@@ -16,8 +14,12 @@ public:
 				pq.push(amount[x]);
 			}
 		}
-		pq_size = pq.size();
-		while (pq_size) // pq.size() > 0
+		// just found out pq.size() cant be zero since it's undefined because it's stored
+		// as a binary tree
+		while (pq.size() > 1) //{//pq.size() > 0
+							  // y = pq.top();
+							  // pq.pop();
+							  // printf("y == %i\n",y);
 		{
 			y = pq.top();
 			pq.pop();
@@ -63,11 +65,14 @@ public:
 				num_of_seconds += 1;
 				printf("y == %i\nx== %i\n\n", y, x);
 			}
-			pq_size = pq.size();
 			printf("pq_size == %i\n", pq_size);
 			printf("pq.size() == %i\n\n", pq.size());
 		} // end of while loop
 
+		if (pq.size() == 1)
+		{
+			num_of_seconds += pq.top();
+		}
 		return num_of_seconds;
 	}
 };
