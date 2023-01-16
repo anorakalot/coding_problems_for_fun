@@ -2,47 +2,64 @@ class Solution
 {
 public:
 	int i = 0;
+	int curr_i = 0;
 	vector<int> return_val;
-	int num_of_bits = 1;
+	// vector<int> dp_memo;
+	map<int, int> dp_memo;
+	int dp_memo_index = 0;
 	int num_of_ones = 0;
-	bool first_time = 0;
+	// int num_of_ones_prev=0;
+	bool no_while_loop = 0;
+	bool right_after_pow_of_2 = 0;
 	vector<int> countBits(int n)
 	{
-		// if ((i %2) == 0 && i != 0){//actually need to change i%2 since it would
-		// work with numbers like 6 when it shouldn't
-		// and only work for 1 2 4 8 16 32 etc
 		printf("i == %i\n", i);
-		if (((i & i - 1) == 0) && i != 0)
+		curr_i = i;
+		num_of_ones = 0;
+		no_while_loop = 0;
+		if ((i & i - 1) == 0 && i != 0)
 		{
-			printf("in first if reset num_of_ones to 1\n");
-			num_of_bits += 1;
+			no_while_loop = 1;
 			num_of_ones = 1;
+			// right_after_pow_of_2 =1;
+			dp_memo_index = 0;
 		}
-		else if (first_time == 0)
+		// if(dp_memo_index < dp_memo.size()-1){
+		//     num_of_ones = dp_memo[dp_memo_index];
+		// }
+		else if (dp_memo[dp_memo_index] > 0 && i != 0)
 		{
-			printf("in second if\n");
-			num_of_ones = 0;
-			first_time = 1;
-		}
-		else
-		{ //
-			printf("in third if\n");
-			num_of_ones += 1;
+			printf("inside using_dp_memo\n");
+			num_of_ones = dp_memo[dp_memo_index];
+			no_while_loop = 1;
 		}
 
-		printf("num_of_ones == %i\n", num_of_ones);
+		while (curr_i != 0 && no_while_loop == 0)
+		{
+			if ((curr_i & 1) == 1)
+			{
+				num_of_ones += 1;
+			}
+			curr_i = curr_i >> 1;
+		}
+		// if (dp_memo_index > dp_memo.size()-1){//index bigger than current size
+		//     dp_memo.push_back(num_of_ones);
+		// }
+		if (dp_memo[dp_memo_index] == 0 && i != 0)
+		{
+			printf("inside saving dp_memo\n");
+			dp_memo[dp_memo_index] = num_of_ones;
+		}
+
+		// dp_memo.push_back(num_of_ones);
+		// num_of_ones_prev = num_of_ones;
 		return_val.push_back(num_of_ones);
-		printf("after push_back\n");
-		// should have operation before base case
 		if (i == n) // base case for recusion
 		{
-			printf("inside base case i == n");
 			return return_val;
 		}
-		// need to have base case before recursion so that base case can return
-		// before recusive call
 		i += 1; // right before recursive call
-		printf("\n\n");
+		dp_memo_index += 1;
 		return_val = countBits(n);
 		return return_val;
 	}
