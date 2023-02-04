@@ -15,10 +15,13 @@ procedure Lab_3_2_Book is
    --char_val : character := ' ';
    string_val : string(1..4);
 
+
    while_bool : Boolean := True;
 
+   get_rid_of_newline_bug_char : Character := ' ';
 
 begin
+
    while while_bool loop
 
       random100.reset(gen=>gen);
@@ -29,7 +32,6 @@ begin
       case generatednum is
          when 1..9 =>
             Ada.Text_IO.Put_line("in 0-9 range");
-
          when 10..19=>
             Ada.Text_IO.Put_Line("in 10's range");
          when 20..29=>
@@ -52,13 +54,20 @@ begin
             Ada.Text_IO.Put_Line("is 100!");
       end case;
 
+      --string_val := Ada.Text_IO.get_line;--(temp_string,last);
+      --Ada.Text_IO.put(temp_string);
+      --Ada.Text_IO.put(last);
+      --string_val := temp_string(1..last);
+
+      --Ada.Text_IO.Get(get_rid_of_newline_bug_char);
 
       Ada.Text_IO.get_line(temp_string,last);
-
       Ada.Text_IO.Put_Line(" temp_string = " & temp_string);
       Ada.Text_IO.Put_Line("last = " & natural'image(last));
+
       --char_val := character'value(temp_string(1..last));
-      string_val := temp_string(1..last);--bug on this line
+      --string_val := temp_string(1..last);--bug on this line
+      Ada.strings.fixed.move(temp_string,string_val);
 
       Ada.Text_IO.Put_Line("string_val = " & string_val);
       --Ada.Text_IO.Put_Line("char_val " & character'image(char_val));
