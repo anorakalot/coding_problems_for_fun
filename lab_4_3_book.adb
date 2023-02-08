@@ -21,13 +21,15 @@ procedure Lab_4_3_Book is
       Ada.Text_IO.Put_Line("element(unb_str_inp,index_1) " & Ada.Strings.Unbounded.element(unb_str_inp,index_1));
 
 
-      if (index_0 < index_1) then -- base case
+      if ( Ada.Strings.Unbounded.element(unb_str_inp,index_0) /= Ada.Strings.Unbounded.element(unb_str_inp,index_1))then
+            return False;
+
+      elsif (index_0 < index_1) then -- base case
 
          return True;
 
+         --fixed bug by just switching above if statement so index check was last
 
-      elsif ( Ada.Strings.Unbounded.element(unb_str_inp,index_0) /= Ada.Strings.Unbounded.element(unb_str_inp,index_1))then
-            return False;
 
       else
             --if equal to each other
@@ -40,7 +42,8 @@ procedure Lab_4_3_Book is
 
 begin--youtube gives wrong answer
    Ada.Text_IO.PUt_Line("Start of 4_3");
-   unb_str_0 := Ada.Strings.Unbounded.To_Unbounded_String("youtube");--racecar,youtube (check for non palindrome),noon
+   --recursion just has the index be part of the input for the function  and has it call the function again with new indexes in place of the while loop
+   unb_str_0 := Ada.Strings.Unbounded.To_Unbounded_String("saippuakivikauppias");--racecar,youtube (check for non palindrome),noon
    index_1 := Ada.Strings.Unbounded.Length(unb_str_0);
    return_bool_val := palindrome_or_not(unb_str_0,index_0,index_1);
    Ada.Text_IO.Put_Line("return_bool_val = " & Boolean'Image(return_bool_val));
