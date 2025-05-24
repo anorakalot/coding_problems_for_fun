@@ -20,6 +20,8 @@ expected_time_input = input("if want default (30 min) press enter ,else input in
 if (expected_time_input !=  ""):
     expected_time = int(expected_time_input) * 60
 
+print("expected_time = ", expected_time)
+
 print("starting time now")
 
 starting_time = int(time.time())
