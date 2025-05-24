@@ -11,9 +11,9 @@ multi_input = input ("\r\nWhich type of task? 1. menial task 2. engineering task
 
 
 if (multi_input == '1'):
-    multiplier = 5
+    multiplier = 20
 else:
-    multiplier = 10
+    multiplier = 100
     
 expected_time_input = input("if want default (30 min) press enter ,else input in time in minutes\r\n")
 
@@ -37,9 +37,11 @@ if (diff == 0):
 
 #points = multiplier*(3600/diff)
 
-#points = (multiplier * max(0, 1 - (diff / 1800)))
+points = (multiplier * max(0.01, 1 - (diff / expected_time)))
 
-points = (multiplier *  (1 / (math.log(diff / expected_time)+1)))
+#epsilon = 1e-6
+
+#points = (multiplier *  (1 / (math.log((diff / expected_time)+epsilon)+1)))
 
 
 #if past the hour mark but I still get points for finishing a task
