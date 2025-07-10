@@ -11,17 +11,26 @@ multi_input = input ("\r\nWhich type of task? 1. menial task 2. engineering task
 
 
 if (multi_input == '1'):
-    multiplier = 20
+    multiplier = 1
 else:
-    multiplier = 100
+    multiplier = 10
     
 expected_time_input = input("if want default (30 min) press enter ,else input in time in minutes\r\n")
 
 if (expected_time_input !=  ""):
     expected_time = int(expected_time_input) * 60
 
-print("expected_time = ", expected_time)
+num_of_retries = input("Input num of retries this is, (if it's the first enter 0) \r\n")
 
+
+if (num_of_retries == ""):
+    num_of_retries = 0
+else:
+    num_of_retries = int(num_of_retries)
+
+print("expected_time (m) = ", expected_time / 60)
+print("expected_time (s) = ", expected_time)
+print("num_of_retries = ",num_of_retries);
 print("starting time now")
 
 starting_time = int(time.time())
@@ -37,8 +46,15 @@ if (diff == 0):
 
 #points = multiplier*(3600/diff)
 
-points = (multiplier * max(0.01, 1 - (diff / expected_time)))
+#if less than expected time give full points
+if (diff <= expected_time):
+    points = multiplier
 
+else:
+    #give up to double the time decreasing points as it goes 
+    points = (multiplier * max(0.01, 1 - (diff / expected_time*2)))
+
+points = points / (1+num_of_retries)
 #epsilon = 1e-6
 
 #points = (multiplier *  (1 / (math.log((diff / expected_time)+epsilon)+1)))
@@ -54,5 +70,5 @@ print("ending_time",ending_time)
 print("starting_time",starting_time)
 print("diff in sec",diff)
 print("diff in min",diff / 60)
-print("points non int",points)
-print("points",int(points))
+print("points (float) ",points)
+print("points (int) ",int(points))
