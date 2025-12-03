@@ -11,6 +11,15 @@ int searchInsert(int* nums, int numsSize, int target) {
 
     int counter = 0;
 
+    if (numsSize == 1){
+        if (target > nums[0]){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
     while( nums[middle] != target ) { 
     
         printf("counter = %i\n",counter);
@@ -18,7 +27,7 @@ int searchInsert(int* nums, int numsSize, int target) {
         printf("low = %i\n", low);
         printf("high = %i\n", high);
         middle = (high + low) / 2;
-        printf("middle = %i\n ",middle);
+        printf("middle = %i\n",middle);
 
         printf("nums[middle] = %i\n",nums[middle]);
 
@@ -27,12 +36,12 @@ int searchInsert(int* nums, int numsSize, int target) {
         high = middle - 1;
         }
 
-        else if( nums[middle] < target && middle != 0 && low < high && low != high ){
+        else if( nums[middle] < target  && low < high && low != high ){ //middle != 0
         printf("nums[middle] < target\n\n");
         low = middle + 1;
         }
 
-        else if (middle == 0){
+        else if (middle == 0 && numsSize != 1){
             printf("middle == 0 case \n\n");
             if (target > nums[middle]){
                 middle += 1;
@@ -44,7 +53,9 @@ int searchInsert(int* nums, int numsSize, int target) {
 
         else if (middle >= (numsSize-1)){
             printf("middle >= numsSize-1 case\n\n");
-            middle +=1;
+            if (target > nums[middle]){
+                middle +=1;
+            }
             return middle;
         }
 
