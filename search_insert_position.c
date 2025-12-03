@@ -22,24 +22,28 @@ int searchInsert(int* nums, int numsSize, int target) {
 
         printf("nums[middle] = %i\n",nums[middle]);
 
-        if (nums[middle] > target && !(middle >=numsSize-1) && low < high){
+        if (nums[middle] > target && !(middle >=numsSize-1) && low < high && low != high){
         printf("nums[middle] > target\n\n");
         high = middle - 1;
         }
 
-        else if( nums[middle] < target && middle != 0 && low < high){
+        else if( nums[middle] < target && middle != 0 && low < high && low != high ){
         printf("nums[middle] < target\n\n");
         low = middle + 1;
         }
 
         else if (middle == 0){
-            printf("middle == 0\n\n");
-            middle += 1;
+            printf("middle == 0 case \n\n");
+            if (target > nums[middle]){
+                middle += 1;
+            }
+            
+
             return middle;
         }
 
         else if (middle >= (numsSize-1)){
-            printf("middle >= numsSize-1\n\n");
+            printf("middle >= numsSize-1 case\n\n");
             middle +=1;
             return middle;
         }
