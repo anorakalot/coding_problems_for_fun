@@ -11,7 +11,9 @@ int reverseBits(int n) {
 
     int left_shift_for_return_val = 31;
 
-    for (int x = 0; x < 32; x++){
+    for (int x = 0; x < 30; x++){
+        //problem is above it's going to far 
+
         //first get the first 2^0 bit value of n
         bit_val_n = mask_for_n & n;
         printf("bit_val = %i\n",bit_val_n);
@@ -29,6 +31,9 @@ int reverseBits(int n) {
         //then move the bit_val_n to return_val 0x80000000 position 
         //so maybe left shift it by a ton?
         // return_val
+
+        printf("\n\n");
     }
-    return 0;
+
+    return return_val;
 }
