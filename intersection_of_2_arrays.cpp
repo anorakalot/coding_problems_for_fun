@@ -3,7 +3,7 @@ public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
         vector<int> return_arr;
 
-        return_arr.push_back();
+        // return_arr.push_back();
 
         //probably do a hash table
         unordered_map<int, int> unique_val_map;
@@ -11,7 +11,22 @@ public:
         //so maybe solution is to do 2 for loops 1 adding all of them to the unordmered map
         //then for the next vector checking if it contains it already and if it does add to the return_arr
         // maybe the second int is how many times it shows up? 
-        unique_val_map.contains()
+
+        for (int x = 0; x < nums1.size(); x++){
+            if (unique_val_map.count(nums1[x]) == 0){
+                unique_val_map[nums1[x]] += 1;
+            }
+        }
+
+        for (int x = 0; x < nums2.size(); x++){
+            if (unique_val_map.count(nums2[x]) >=1){
+                return_arr.push_back(nums2[x]);
+            }
+        }
+
+        return return_arr;
+
+        
     }
 };
 
