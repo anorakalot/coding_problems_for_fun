@@ -14,16 +14,21 @@ public:
 
         for (int x = 0; x < nums1.size(); x++){
             if (unique_val_map.count(nums1[x]) == 0){
-                unique_val_map[nums1[x]] += 1;
+                unique_val_map[nums1[x]] = 0;
             }
         }
 
         for (int x = 0; x < nums2.size(); x++){
             if (unique_val_map.count(nums2[x]) >=1){
-                return_arr.push_back(nums2[x]);
+                if ((unique_val_map[nums2[x]]) == 0){
+                    return_arr.push_back(nums2[x]);
+                }
+                //to stop repeat values
+                unique_val_map[nums2[x]] += 1;  
             }
         }
 
+        //need to do something with the unique_val  
         return return_arr;
 
         
