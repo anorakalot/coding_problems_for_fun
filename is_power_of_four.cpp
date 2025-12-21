@@ -9,25 +9,34 @@ public:
         //0
         //not even
         if ((n % 2 != 0 && n != 1 )){// && n % 4 == 0 ){
+            std::cout<<" in n%2 and n != 1"<<std::endl;
+            return 0;
+        }
+        if (n == 1 || n == 4){
+            std::cout<<" in n== 1 and n == 4"<<std::endl;
+            return 1;
+        }
+        if (n % 4 != 0 ){
+            std::cout<<" in n%4"<<std::endl;
             return 0;
         }
 
-        else if (n == 1 || n == 4){
-            return 1;
-        }
 
         //0110
+        int return_val = 0;
 
         while ( n > 0){
         
             if (n == 1){
-                return 1;
+                std::cout<<"n is now at 1" << std::endl;
+                return_val = 1;
+                break;
             }
-            n >>= 4;
+            n >>= 3;
             std::cout<< n << std::endl;
         
         }
 
-        return 0;
+        return return_val;
     }
 };
