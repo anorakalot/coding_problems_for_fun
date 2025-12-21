@@ -16,7 +16,7 @@ public:
 
         //ok could also do something like have a vector initialize all to zeros and if that number is in nums
         //add a 1 at that nums index then do another for loop through it
-        vector<int> checking_values(nums.size(),0);
+        vector<int> checking_values(nums.size()+1,0);
         
         for (int x = 0; x < nums.size(); x++){
             checking_values[nums[x]] = 1;
