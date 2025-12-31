@@ -9,10 +9,25 @@ public:
         int highest_counter = 0;
         int curr_counter = 0;
 
+        bool one_is_found = false;
         //first check that it starts at a 1 then keep track of the times it shows up a 1 then 2 different cases based if 
         //there already was a one or not
         for (int x = 0; x < 10; x++){
-            
+            //meaning there's a 1 at this bit value spot
+            if (mask & n > 0){
+                if(one_is_found == false){
+                    one_is_found = true;
+                }
+
+                //it was already trye
+                else{
+
+                }
+            }
+
+            else{
+                one_is_found = false;
+            }
         }
 
     }
