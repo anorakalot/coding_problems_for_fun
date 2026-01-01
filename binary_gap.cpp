@@ -1,3 +1,4 @@
+using namespace std;
 class Solution {
 public:
     int binaryGap(int n) {
@@ -8,27 +9,44 @@ public:
 
         int highest_counter = 0;
         int curr_counter = 0;
+        int curr_val = 0;
 
         bool one_is_found = false;
         //first check that it starts at a 1 then keep track of the times it shows up a 1 then 2 different cases based if 
         //there already was a one or not
         for (int x = 0; x < 10; x++){
             //meaning there's a 1 at this bit value spot
-            if (mask & n > 0){
+            cout << "mask" << mask << endl;
+            cout <<"n " << n << endl;
+            curr_val = mask & n;
+            cout <<"mask & n " << curr_val << endl;
+            
+            if ((mask & n) > 0){
                 if(one_is_found == false){
                     one_is_found = true;
                 }
-
-                //it was already trye
+            
+                //this is the last one it found
+                //it was already found a 1
                 else{
-
+                    curr_counter += 1;
+                    if (curr_counter > highest_counter){
+                        highest_counter = curr_counter;
+                    }
                 }
             }
-
-            else{
-                one_is_found = false;
+            else if (one_is_found == true){
+                curr_counter +=1;
+                if (curr_counter > highest_counter){
+                        highest_counter = curr_counter;
+                }
             }
-        }
+            mask <<= 1;
 
+
+
+        }//end of for loop 
+
+        return highest_counter;
     }
 };
