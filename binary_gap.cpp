@@ -21,7 +21,7 @@ public:
         //!!!oh wait now I get it it's because need to differentiate between finding ending 1 and only finding the first 1 and nothing else
 
         //now just need to reset to
-        for (int x = 0; x < 10; x++){
+        for (int x = 0; x < 30 ; x++){
             //meaning there's a 1 at this bit value spot
             cout << "mask" << mask << endl;
             cout <<"n " << n << endl;
