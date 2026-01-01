@@ -43,6 +43,7 @@ public:
                     if (curr_counter > highest_counter){
                         highest_counter = curr_counter;
                     }
+                    curr_counter = 0;
                     first_one_is_found = true;
                 }
             }
