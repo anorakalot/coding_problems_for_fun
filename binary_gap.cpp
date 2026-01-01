@@ -12,12 +12,15 @@ public:
         int curr_val = 0;
 
         bool one_is_found = false;
+        bool first_one_is_found = false;
+        bool second_one_is_found = false;
         //first check that it starts at a 1 then keep track of the times it shows up a 1 then 2 different cases based if 
         //there already was a one or not
 
 
         //!!!oh wait now I get it it's because need to differentiate between finding ending 1 and only finding the first 1 and nothing else
 
+        //now just need to reset to
         for (int x = 0; x < 10; x++){
             //meaning there's a 1 at this bit value spot
             cout << "mask" << mask << endl;
@@ -26,30 +29,35 @@ public:
             cout <<"mask & n " << curr_val << endl;
             
             if ((curr_val) > 0){
-                if(one_is_found == false){
-                    cout << "one_is_found == 1"<< endl;
-                    one_is_found = true;
+                if(first_one_is_found == false){
+                    cout << "first_one_is_found == 1"<< endl;
+                    first_one_is_found = true;
                 }
             
                 //this is the last one it found
                 //it was already found a 1
-                else{
+                else if (first_one_is_found == true){
+                    // second_one_is_found = true;
                     curr_counter += 1;
-                    cout << "curr counter 1 : " << curr_counter << endl;
+                    cout << "curr counter found second one : " << curr_counter << endl;
                     if (curr_counter > highest_counter){
                         highest_counter = curr_counter;
                     }
+                    first_one_is_found = true;
                 }
             }
 
-            else if (one_is_found == true){
+            else if (first_one_is_found == true){
+
                 curr_counter +=1;
-                cout << "curr counter 2 : " << curr_counter << endl;
-                if (curr_counter > highest_counter){
-                        highest_counter = curr_counter;
-                }
+                cout << "curr counter only first one is found : " << curr_counter << endl;
+                // if (curr_counter > highest_counter){
+                //         highest_counter = curr_counter;
+                // }
             }
             mask <<= 1;
+
+            cout << endl<<endl;
 
 
 
