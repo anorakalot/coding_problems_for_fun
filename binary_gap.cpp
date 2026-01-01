@@ -14,6 +14,10 @@ public:
         bool one_is_found = false;
         //first check that it starts at a 1 then keep track of the times it shows up a 1 then 2 different cases based if 
         //there already was a one or not
+
+
+        //!!!oh wait now I get it it's because need to differentiate between finding ending 1 and only finding the first 1 and nothing else
+
         for (int x = 0; x < 10; x++){
             //meaning there's a 1 at this bit value spot
             cout << "mask" << mask << endl;
@@ -21,8 +25,9 @@ public:
             curr_val = mask & n;
             cout <<"mask & n " << curr_val << endl;
             
-            if ((mask & n) > 0){
+            if ((curr_val) > 0){
                 if(one_is_found == false){
+                    cout << "one_is_found == 1"<< endl;
                     one_is_found = true;
                 }
             
@@ -30,13 +35,16 @@ public:
                 //it was already found a 1
                 else{
                     curr_counter += 1;
+                    cout << "curr counter 1 : " << curr_counter << endl;
                     if (curr_counter > highest_counter){
                         highest_counter = curr_counter;
                     }
                 }
             }
+
             else if (one_is_found == true){
                 curr_counter +=1;
+                cout << "curr counter 2 : " << curr_counter << endl;
                 if (curr_counter > highest_counter){
                         highest_counter = curr_counter;
                 }
