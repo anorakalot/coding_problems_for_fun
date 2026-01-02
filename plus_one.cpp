@@ -18,10 +18,17 @@ public:
                 break;    
             }
             else{
-                curr_index -= 1;
+
+                digits[curr_index] = 0;
+
+                if(curr_index > 0){
+                    curr_index -= 1;
+                }
+
                 //need to add a test case where I add another index to the front if the curr_index is 0
-                if (curr_index == 0){
+                else if (curr_index == 0){
                      digits.insert(digits.begin(), 0);
+                     
                 }
             }
         }
