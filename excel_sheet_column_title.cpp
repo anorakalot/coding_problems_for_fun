@@ -14,6 +14,18 @@ public:
 
         string return_str = "";
 
+
+
+        //oh what the pattern is every 26 the first6 letter changes up by one
+        //
+
+        // maybe there's an easier addition method
+
+        // return_str = 
+
+        //at 53 it goes to BA
+
+        //maybe first loop see how many letters there are first?
         return return_str;
     }
 };
