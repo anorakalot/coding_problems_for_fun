@@ -26,6 +26,14 @@ public:
         //at 53 it goes to BA
 
         //maybe first loop see how many letters there are first?
+        //so if it's under 26 it's 1 it it's over 26 and under 703 it's 2 (there's no clean divisioni so probably do addition)
+        //in the solution so it's easier
+
+        //I don't think that's 
+
+        //maybe have to do it as it's going on so maybe minus 26 each time and see what the remaining thing is and that's the alogirhtm?
+
+        //so if more than 26 see what's remaining and if it's less than 26 correlate it to the remiaining
         return return_str;
     }
 };
