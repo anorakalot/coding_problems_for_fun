@@ -34,6 +34,24 @@ public:
         //maybe have to do it as it's going on so maybe minus 26 each time and see what the remaining thing is and that's the alogirhtm?
 
         //so if more than 26 see what's remaining and if it's less than 26 correlate it to the remiaining
+
+        //fudge it let's just solve it one 2 letters at least for now then expand the algorithm later
+
+        //78 - 26 - 26
+        //maybe keep it up to 0 - 26 then that's the last letter
+
+        //so example algorithm is if it's over 26 keep minusing 26 until it's between 0 - 26 
+        //the number of times it was minused 26 until it gets there is the first letter in the str;
+        int curr_val = columnNumber;
+        char curr_char = '@';
+
+        while (curr_val >26){
+            curr_val -= 26;
+            curr_char+=1;
+        
+        }
+        cout << curr_char<< endl;
+
         return return_str;
     }
 };
