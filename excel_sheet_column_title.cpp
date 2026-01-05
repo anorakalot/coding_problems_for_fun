@@ -50,8 +50,12 @@ public:
             curr_char+=1;
         
         }
+        
         cout << curr_char<< endl;
 
+        //ok so this is failing due to not taking into account less than 26 right off the bat
+        //and I still need to find a efficient way to map 26 and under
+        //more ascii chart stuff? like - '0'
         return return_str;
     }
 };
