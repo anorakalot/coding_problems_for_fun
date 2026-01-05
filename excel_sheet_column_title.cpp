@@ -45,6 +45,10 @@ public:
         int curr_val = columnNumber;
         char curr_char = '@';
 
+        if (curr_val < 26){
+            curr_char += curr_val;
+        }
+        
         while (curr_val >26){
             curr_val -= 26;
             curr_char+=1;
@@ -56,6 +60,9 @@ public:
         //ok so this is failing due to not taking into account less than 26 right off the bat
         //and I still need to find a efficient way to map 26 and under
         //more ascii chart stuff? like - '0'
+
+
+        //maybe make a char vector where the index corresponds to the number from 1 - 26 for the numbers?
         return return_str;
     }
 };
