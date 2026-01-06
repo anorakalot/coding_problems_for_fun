@@ -43,9 +43,12 @@ public:
         //the number of times it was minused 26 until it gets there is the first letter in the str;
         int curr_val = columnNumber;
         char first_char = '@';
+        char second_char = '@';
 
         if (curr_val < 26){
             first_char += curr_val;
+            curr_val = -1;
+            //set it to 0
         }
 
         while (curr_val >26){
@@ -56,6 +59,16 @@ public:
         cout << first_char<< endl;
 
         return_str.push_back(first_char);
+
+
+        //do the secondchar;
+        if (curr_val < 26 && curr_val != -1){
+            second_char += curr_val;
+            curr_val = -1;
+        }
+
+
+        return_str.push_back(second_char);
 
         // char
         //ok so this is failing due to not taking into account less than 26 right off the bat
