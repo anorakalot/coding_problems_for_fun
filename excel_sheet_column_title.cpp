@@ -12,8 +12,7 @@ public:
 
         //but that only seems to work for up to 2 what about 3 or more
 
-        string return_str = "";
-
+        string return_str;
 
 
         //oh what the pattern is every 26 the first6 letter changes up by one
@@ -43,20 +42,22 @@ public:
         //so example algorithm is if it's over 26 keep minusing 26 until it's between 0 - 26 
         //the number of times it was minused 26 until it gets there is the first letter in the str;
         int curr_val = columnNumber;
-        char curr_char = '@';
+        char first_char = '@';
 
         if (curr_val < 26){
-            curr_char += curr_val;
+            first_char += curr_val;
         }
-        
+
         while (curr_val >26){
             curr_val -= 26;
-            curr_char+=1;
-        
+            first_char+=1;
         }
         
-        cout << curr_char<< endl;
+        cout << first_char<< endl;
 
+        return_str.push_back(first_char);
+
+        // char
         //ok so this is failing due to not taking into account less than 26 right off the bat
         //and I still need to find a efficient way to map 26 and under
         //more ascii chart stuff? like - '0'
