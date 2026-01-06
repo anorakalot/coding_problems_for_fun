@@ -60,15 +60,16 @@ public:
 
         return_str.push_back(first_char);
 
-
+        cout <<"curr_val before second char" <<curr_val<< endl;
         //do the secondchar;
         if (curr_val < 26 && curr_val != -1){
             second_char += curr_val;
             curr_val = -1;
+            return_str.push_back(second_char);
         }
 
-
-        return_str.push_back(second_char);
+        
+ 
 
         // char
         //ok so this is failing due to not taking into account less than 26 right off the bat
