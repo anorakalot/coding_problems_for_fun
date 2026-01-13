@@ -43,5 +43,8 @@ public:
 
         //maybe do it manually for 3 letters and see if that helps find the correct loop algo?
         return return_str;
+
+
+        //maybe 703 since it's over 27? that's the pattern
     }
 };
