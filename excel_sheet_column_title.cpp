@@ -5,35 +5,37 @@ public:
         string return_str;
 
         int curr_val = columnNumber;
-        char first_char = '@';
-        char second_char = '@';
+        char curr_char = '@';
 
+        while(!(curr_val <=0)){
+        
         if (curr_val <= 26){
-            first_char += curr_val;
+            curr_char  += curr_val;
             curr_val = -1;
             //set it to 0
         }
 
-        while (curr_val >26){
-            curr_val -= 26;
-            //maybe something here since 703 instead of AAA is [A  ? oh but [ is right after Z in the ascii chart
-            // if (first_char <= 'A'){
-            //     break;
-            // }
-            first_char+=1;
+        else{
+            while (curr_val >26 && curr_char != 'Z'){
+                curr_val -= 26;
+                //maybe something here since 703 instead of AAA is [A  ? oh but [ is right after Z in the ascii chart
+                // if (first_char <= 'A'){
+                //     break;
+                // }
+                curr_char +=1;
+                }
         }
+
+     cout << curr_char << endl;
+     return_str.push_back(curr_char);
+
+    }
         
-        cout << first_char<< endl;
+        
 
-        return_str.push_back(first_char);
+       
 
-        cout <<"curr_val before second char" <<curr_val<< endl;
-        //do the secondchar;
-        if (curr_val <= 26 && curr_val != -1){
-            second_char += curr_val;
-            curr_val = -1;
-            return_str.push_back(second_char);
-        }
+
 
 
         //ok so the thing is I know the loop structure should be 
