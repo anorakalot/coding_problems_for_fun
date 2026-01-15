@@ -16,19 +16,24 @@ public:
         }
 
         else{
-            while (curr_val >26 && curr_char != 'Z'){
+            while (curr_val >26 && curr_char != '['){
+
+
                 curr_val -= 26;
-                //maybe something here since 703 instead of AAA is [A  ? oh but [ is right after Z in the ascii chart
-                // if (first_char <= 'A'){
-                //     break;
-                // }
+                //maybe if it reaches z but needs to go over then we make it so that it goes over back to A because this means 
+                //it needs to do another
                 curr_char +=1;
                 }
+            if (curr_char == '['){
+                curr_char = 'A';
+            }
         }
 
      cout << curr_char << endl;
      return_str.push_back(curr_char);
-
+     
+     //reset it back to curr_char
+     curr_char = '@';
     }
         
         
