@@ -9,13 +9,16 @@ public:
 
         while(!(curr_val <=0)){
         
+        cout << "curr_val pos 1: " << curr_val <<endl;
         if (curr_val <= 26){
             curr_char  += curr_val;
             curr_val = -1;
             //set it to 0
         }
-
+       
+        
         else{
+         cout << "curr_val pos 2: " << curr_val <<endl;
             while (curr_val >26 && curr_char != '['){
 
 
@@ -28,6 +31,8 @@ public:
                 curr_char = 'A';
             }
         }
+        cout << "curr_val pos 3: " << curr_val <<endl;
+        
 
      cout << curr_char << endl;
      return_str.push_back(curr_char);
@@ -38,15 +43,11 @@ public:
         
         
 
-       
+       //26*26 + 26 = 702 (ZZ the last of the 2 letters)
+        
 
 
 
-
-        //ok so the thing is I know the loop structure should be 
-        //curr_val -= 26 until it gets to less than 26
-
-        // need to find out how to make this loop work with multiple letters (not just 2)
 
         //maybe do it manually for 3 letters and see if that helps find the correct loop algo?
         return return_str;
