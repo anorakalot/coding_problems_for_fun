@@ -1,0 +1,11 @@
+how to get gazebo working on wsl
+
+
+https://robotics.stackexchange.com/questions/111547/gazebo-crashes-immediately-segmentation-fault-address-not-mapped-to-object-0
+
+sudo gz sim -v 4 shapes.sdf
+
+
+export LIBGL_ALWAYS_SOFTWARE=1
+
+was in gedit ~/.bashrc
