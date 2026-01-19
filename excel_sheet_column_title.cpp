@@ -9,7 +9,7 @@ public:
 
         while(!(curr_val <=0)){
         
-        cout << "curr_val pos 1: " << curr_val <<endl;
+        cout << "curr_val pos 1 before if: " << curr_val <<endl;
         if (curr_val <= 26){
             curr_char  += curr_val;
             curr_val = -1;
@@ -25,14 +25,20 @@ public:
                 curr_val -= 26;
                 //maybe if it reaches z but needs to go over then we make it so that it goes over back to A because this means 
                 //it needs to do another
+                //ok so the above is further supported because it seems to only do curr_char == '[' when it's above 
+                //2 letters//so maybe switch it  inside the loop take out the '[' loop condition
+                
                 curr_char +=1;
+                
+                if (curr_char == '['){
+                    cout <<"goes into curr_char == [" << endl;
+                    curr_char = 'A';
+                    }
                 }
 
-            if (curr_char == '['){
-                curr_char = 'A';
-            }
+
         }
-        cout << "curr_val pos 3: " << curr_val <<endl;
+        cout << "curr_val pos 3 after if and else: " << curr_val <<endl;
         
 
      cout << curr_char << endl;
