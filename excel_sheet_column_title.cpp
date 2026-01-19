@@ -27,6 +27,7 @@ public:
                 //it needs to do another
                 curr_char +=1;
                 }
+
             if (curr_char == '['){
                 curr_char = 'A';
             }
@@ -44,7 +45,7 @@ public:
         
 
        //26*26 + 26 = 702 (ZZ the last of the 2 letters)
-        
+       // 26 ^ 3 + 26 + 26  = 17628 (still not last of 3 letters)
 
 
 
