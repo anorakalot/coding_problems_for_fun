@@ -7,16 +7,21 @@ public:
 
 
         
-        
+
         int mask = 0x01;
         int counter = 0;
 
-    while(mask < n){
-        if (mask & n > 0){
-            counter += 1;
+        // int curr_comp = 0;
+
+        for (int x = 0; x < 31; x++){
+            // curr_comp = mask & n;
+
+            // cout << curr_comp << endl;
+            if ((mask & n) > 0){
+                counter += 1;
+            }
+            mask <<= 1;
         }
-        mask <<= 1;
-    }
 
         // for (int x = 0; x < n; x ++){
             
