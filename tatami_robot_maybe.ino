@@ -7,6 +7,8 @@
 //
 //need to figure out ways to keep it straight design wise
 //seems to just need to
+// maybe a line follower robot is best because you'd just have to lay doenw the line ahead of time
+// maybe make it like a certain material so it's easy to lay down and works with a lot of different floor colors
 ////////////////////////////////
 
 
