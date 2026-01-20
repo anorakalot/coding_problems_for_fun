@@ -24,16 +24,33 @@ public:
 
                 curr_val -= 26;
                 //maybe if it reaches z but needs to go over then we make it so that it goes over back to A because this means 
-                //it needs to do another
+                //it needs to do another 
                 //ok so the above is further supported because it seems to only do curr_char == '[' when it's above 
                 //2 letters//so maybe switch it  inside the loop take out the '[' loop condition
                 
                 curr_char +=1;
-                
-                if (curr_char == '['){
+                if(curr_char == 'A'){
+                    cout <<"is A at curr_val "<< curr_val << endl;
+                }
+
+                if (curr_char >= '['){
                     cout <<"goes into curr_char == [" << endl;
+                    cout <<"curr_val in == [: "<< curr_val << endl;
                     curr_char = 'A';
-                    }
+                }
+
+                //maybe there's one more thing that determines if it shold stop other thancurr_char being past ascii chart
+                //and it's the curr_val position
+                //but I'm stumped on how it knows to stop until it's in the 2 letter range
+                //so for 765 it currently outputs CK but the real output is ACK
+                //so it's just missing the first letter 
+                //maybe make it print at the letter it should be at and see what val it was at it
+                //same thing with 810 (outputs ED and but correct output is AED)
+                //920 is AEJ too?
+                //oh wait maybe it's A until all combinations in the digits before so for 3 it's 2 happen then it's b
+                //1600 BIN
+                //1650 is BKL
+                
                 }
 
 
