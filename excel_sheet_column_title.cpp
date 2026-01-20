@@ -31,6 +31,12 @@ public:
                 curr_char +=1;
                 if(curr_char == 'A'){
                     cout <<"is A at curr_val "<< curr_val << endl;
+                    
+                }
+
+                if(curr_char == 'B'){
+                    cout <<"is B at curr_val "<< curr_val << endl;
+                    
                 }
 
                 if (curr_char >= '['){
@@ -50,7 +56,9 @@ public:
                 //oh wait maybe it's A until all combinations in the digits before so for 3 it's 2 happen then it's b
                 //1600 BIN
                 //1650 is BKL
-                
+
+                //maybe do the combination formula? and work backwards?
+
                 }
 
 
