@@ -30,7 +30,7 @@
 // have a thing in the code that takes the distance measurement of the other hopefully 3 unobstructed measurements
 
 // need to find a way to also
-// use ros? and simulate robot in gazebo.
+// use ros? (micro ros) and simulate robot in gazebo.
 ////////////////////////////////
 
 
@@ -42,7 +42,9 @@ in order to enable us to select which ESP32 core (core 0 or core 1) will run the
 
 #define LED 15
 
+//dont really need this since in the freertos documentation only is used for xtask_delete and I don't plan on deleting any of these tasks
 TaskHandle_t LEDBlinking = NULL;  ///  Task handler fot the LED Task
+TaskHandle_t lidar_task_handle = NULL;  ///  Task handler fot the LED Task
 
 //==============================================================================================//
 // Function to be implemented the LED task is called 
@@ -55,6 +57,11 @@ void BlinkingLED(void *arg){
     vTaskDelay(250/ portTICK_RATE_MS);
   }
 }
+
+void lidar_task(void * arg){
+
+}
+
 //===========================================================================================//
 void setup() {
   // put your setup code here, to run once:
@@ -75,4 +82,7 @@ void loop() {
                         //last is core which is specific to esp32
 
   xTaskCreatePinnedToCore(BlinkingLED, "BlinkingLED",3000, NULL, 10, &LEDBlinking, 0);
+
+
+  xTaskCreatePinnedToCore(lidar_task, "lidar_task",3000, NULL, 10, &lidar_task_handle, 0);
 }
