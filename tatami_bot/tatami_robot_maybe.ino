@@ -58,6 +58,10 @@ void BlinkingLED(void *arg){
   }
 }
 
+//maybe use this lidar https://www.adafruit.com/product/4058?srsltid=AfmBOoraJ1yOCzjVNKmKuj9RDAwVqnrjyV47eyn-3niBIialN0mUVo1qP0w
+//it has code examples and how to connect it already
+//also it already has a library to use!
+//https://github.com/garmin/LIDARLite_Arduino_Library
 void lidar_task(void * arg){
 
 }
