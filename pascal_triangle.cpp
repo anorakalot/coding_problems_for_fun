@@ -13,11 +13,16 @@ public:
 
         //it always start with these 2
         
+        if(numRows >= 2){
 
-        vector<int> curr_vec;
+        
+            vector<int> curr_vec;
 
-        for (int x = numRows - 2; x > 0; x--){
-            // if ()
+            for (int x = 3 ; x < numRows ; x++){
+                curr_vec.resize(x);
+                cout << curr_vec.size() << endl;
+            }
+
         }
 
     return return_2d_array;
