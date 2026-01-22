@@ -15,12 +15,25 @@ public:
         
         if(numRows >= 2){
 
-        
+            
             vector<int> curr_vec;
 
-            for (int x = 3 ; x < numRows ; x++){
+
+            for (int x = 3 ; x <= numRows ; x++){
+                if(x > 3){
+                    curr_vec.clear();
+                }
                 curr_vec.resize(x);
-                cout << curr_vec.size() << endl;
+                curr_vec[0] = 1;
+                curr_vec[x-1] = 1;
+
+                cout << "curr_vec_array" << endl;
+               for(int y = 0; y < x; y++){
+                
+                cout << curr_vec[y] << " ";
+                cout << endl;
+
+               }
             }
 
         }
