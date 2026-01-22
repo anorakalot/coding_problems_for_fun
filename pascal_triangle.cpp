@@ -34,6 +34,10 @@ public:
                 cout << endl;
 
                }
+               
+               //maybe go through all of the ones with zerothen calculate what they should be
+               //keep track of the 2 current indexes of the previous vector above it
+               //then move them up 1 by 1 after adding and putting them together
             }
 
         }
