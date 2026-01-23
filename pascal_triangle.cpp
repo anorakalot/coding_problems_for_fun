@@ -27,9 +27,20 @@ public:
                 if(x > 3){
                     curr_vec.clear();
                 }
+                cout << "1 chpt" << endl;
                 curr_vec.resize(x);
                 curr_vec[0] = 1;
                 curr_vec[x-1] = 1;
+                
+                /////////////////////
+                //printout debugging
+                cout << "curr_vec_array debugging 1" << endl;
+                for(int y = 0; y < x; y++){
+                
+                cout << curr_vec[y] << " ";
+                cout << endl;
+                }
+                //////////////////////
 
                 first_col_index_2d = 0;
                 last_col_index_2d = 1;
@@ -37,32 +48,43 @@ public:
                //maybe go through all of the ones with zerothen calculate what they should be
                //keep track of the 2 current indexes of the previous vector above it
                //then move them up 1 by 1 after adding and putting them together
-               
+
+              cout << endl<< endl;
+              cout<< "inside of 2d_array adding" << endl;
+              cout<<"row_index_2d = "<< row_index_2d << endl;
                for(int z = 1; z < x-1; z++){
+                
                  curr_vec[z] = return_2d_array[row_index_2d][first_col_index_2d] + 
                                return_2d_array[row_index_2d][last_col_index_2d];
 
+                first_col_index_2d += 1;
+                last_col_index_2d += 1;
                }
-                
+            
+                cout << "3 chpt" << endl;
+
                 
                 row_index_2d += 1;
 
                 /////////////////////
                 //printout debugging
-                cout << "curr_vec_array" << endl;
+                cout << "curr_vec_array debugging 2" << endl;
                 for(int y = 0; y < x; y++){
                 
                 cout << curr_vec[y] << " ";
                 cout << endl;
+                }
                 //////////////////////
-
-               }
+                
+                return_2d_array.push_back(curr_vec);
+               }//end of for loop
                
                
-            }
+            }//end of if
 
-        }
+            return return_2d_array;
 
-    return return_2d_array;
-    }
-};
+        }//end of function
+
+
+    };//end of class
