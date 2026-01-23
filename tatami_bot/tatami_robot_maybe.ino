@@ -45,6 +45,7 @@ in order to enable us to select which ESP32 core (core 0 or core 1) will run the
 //dont really need this since in the freertos documentation only is used for xtask_delete and I don't plan on deleting any of these tasks
 TaskHandle_t LEDBlinking = NULL;  ///  Task handler fot the LED Task
 TaskHandle_t lidar_task_handle = NULL;  ///  Task handler fot the LED Task
+TaskHandle_t pwm_motor_task_handle = NULL;
 
 //==============================================================================================//
 // Function to be implemented the LED task is called 
@@ -63,6 +64,31 @@ void BlinkingLED(void *arg){
 //also it already has a library to use!
 //https://github.com/garmin/LIDARLite_Arduino_Library
 void lidar_task(void * arg){
+
+    //get_distance_pwm from all sides not 
+
+    //need to figure out a way to tell if it's a human vs ? no I don't see comment below
+
+    //also technically only need the 3 unobstructed lidar readings since that would be enough to tell position because I could tell position based
+    //on the other 3 unobstructed measurements
+
+}
+//from me:
+// oh fudge there needs to be a way to tell if it's a human blocking the sensor or the wall
+// oh wait if it's the wall is only at a certain heigh just add another lidar at the height where a person would be
+// but there can be issues with if they cover both
+// nvm I think I have a solution
+//from rj:
+//😂 it should able to drive right at the competitor who's cutting
+//from me:
+//oh you don't want it to stop?
+// 🙂
+// yay
+
+
+//ok so now also need to take into account how this is going to work with 2 seperate motors on each side
+//maybe seoerate iut by forward and side?
+void pwm_motor_task(void * arg){
 
 }
 
@@ -89,4 +115,8 @@ void loop() {
 
 
   xTaskCreatePinnedToCore(lidar_task, "lidar_task",3000, NULL, 10, &lidar_task_handle, 0);
+
+  xTaskCreatePinnedToCore(pwm_motor_task, "pwm_motor_task",3000, NULL, 10, &pwm_motor_task_handle, 0);
+
+
 }
