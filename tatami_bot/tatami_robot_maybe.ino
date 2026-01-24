@@ -90,6 +90,7 @@ void lidar_task(void * arg){
 //maybe seoerate iut by forward and side?
 void pwm_motor_task(void * arg){
 
+
 }
 
 //===========================================================================================//
@@ -111,6 +112,9 @@ void loop() {
                         //  TaskHandle_t *pxCreatedTask
                         //last is core which is specific to esp32
 
+  
+  // vTaskDelayUntil() this is what sets the period of each task it's not when the task is created
+  
   xTaskCreatePinnedToCore(BlinkingLED, "BlinkingLED",3000, NULL, 10, &LEDBlinking, 0);
 
 
