@@ -72,6 +72,12 @@ void lidar_task(void * arg){
     //also technically only need the 3 unobstructed lidar readings since that would be enough to tell position because I could tell position based
     //on the other 3 unobstructed measurements
 
+// vTaskDelay blocks a task for a relative, fixed duration from the current time, making it ideal for simple, non-critical delays.
+// Conversely, vTaskDelayUntil blocks until an absolute tick count, ensuring consistent, periodic execution (e.g., sensor sampling) by accounting for execution time. 
+// need to use vTaskDelayUntil for sensors
+
+//also will need to use it for the pwm motors as well
+
 }
 //from me:
 // oh fudge there needs to be a way to tell if it's a human blocking the sensor or the wall
