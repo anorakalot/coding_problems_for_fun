@@ -99,6 +99,17 @@ void pwm_motor_task(void * arg){
 
 }
 
+
+//what other things would we need
+
+
+//maybe a task at the beginning to read in the movements that are needed
+void read_in_pattern_task(void * arg){
+
+  VTaskSuspend();
+}
+
+
 //===========================================================================================//
 void setup() {
   // put your setup code here, to run once:
@@ -121,12 +132,18 @@ void loop() {
   
   // vTaskDelayUntil() this is what sets the period of each task it's not when the task is created
   
+  //maybe only have below priorities be form 0 to 10 
   xTaskCreatePinnedToCore(BlinkingLED, "BlinkingLED",3000, NULL, 10, &LEDBlinking, 0);
 
-
+  //maybe keep both of them
   xTaskCreatePinnedToCore(lidar_task, "lidar_task",3000, NULL, 10, &lidar_task_handle, 0);
 
   xTaskCreatePinnedToCore(pwm_motor_task, "pwm_motor_task",3000, NULL, 10, &pwm_motor_task_handle, 0);
+
+
+  //have this task be highest priority but since it'll get suspended it'll only run once (set at 11 since no other task should be set higher)
+  //also set it as a task in case it needs to be re-read? or maybe just put it in setup?
+  xTaskCreatePinnedToCore(read_in_pattern_task, "read-in_pattern_task",3000, NULL, 11, NULL, 0);
 
 
 }
