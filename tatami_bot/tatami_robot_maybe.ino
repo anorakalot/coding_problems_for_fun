@@ -31,6 +31,9 @@
 
 // need to find a way to also
 // use ros? (micro ros) and simulate robot in gazebo.
+
+
+//IMPORTANT, PUT LIKE AN INDICATOR OR SOMETHING THE PART WHERE THE PERSON SHOULD STAND IN FRONT OF IT
 ////////////////////////////////
 
 
@@ -46,6 +49,17 @@ in order to enable us to select which ESP32 core (core 0 or core 1) will run the
 TaskHandle_t LEDBlinking = NULL;  ///  Task handler fot the LED Task
 TaskHandle_t lidar_task_handle = NULL;  ///  Task handler fot the LED Task
 TaskHandle_t pwm_motor_task_handle = NULL;
+
+
+
+
+float lidar_l;
+float lidar_r;
+float lidar_up;
+
+
+enum curr_motor_dir {left,right,up,down};
+
 
 //==============================================================================================//
 // Function to be implemented the LED task is called 
@@ -71,10 +85,14 @@ void lidar_task(void * arg){
 
     //also technically only need the 3 unobstructed lidar readings since that would be enough to tell position because I could tell position based
     //on the other 3 unobstructed measurements
+    //how to tell if it's obstructed?< 10 or something
 
 // vTaskDelay blocks a task for a relative, fixed duration from the current time, making it ideal for simple, non-critical delays.
 // Conversely, vTaskDelayUntil blocks until an absolute tick count, ensuring consistent, periodic execution (e.g., sensor sampling) by accounting for execution time. 
 // need to use vTaskDelayUntil for sensors
+
+
+  
 
 //also will need to use it for the pwm motors as well
 
@@ -96,7 +114,7 @@ void lidar_task(void * arg){
 //maybe seoerate iut by forward and side?
 void pwm_motor_task(void * arg){
 
-
+    //VTaskDelayUntil
 }
 
 
@@ -104,10 +122,22 @@ void pwm_motor_task(void * arg){
 
 
 //maybe a task at the beginning to read in the movements that are needed
+
+//also how to read in the pattern? maybe as an array or with a hashtable saying to go a direction for a certain length of time
+//then the motor actuator task reads that in and does it? 
+//should the motor actuator task go first then the pwm?
+//let's just worry about left right up and down first
+\//doing the motor task first works then make it go one way then the pwm task should be unchanged just make it different depending on whihc current direction
+//the motor task returns?
 void read_in_pattern_task(void * arg){
 
   VTaskSuspend();
 }
+
+
+
+//also need to put in interrupt in case any of the unobstructed interrupts have it close to colliding withthe wall?
+
 
 
 //===========================================================================================//
