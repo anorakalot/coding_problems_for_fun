@@ -4,11 +4,23 @@ public:
         //ok so read it in until we get to at least a /
         //keep track of the current level?
 
+        int curr_level = 0;
 //oh wait ti's already sepereated
     for (int x = 0; x < logs.size(); x++){
-        
+        //check if first 2 are ..
+        if(logs[x][0] == '.'){
+            if(logs[x][1] == '.'){
+                if(curr_level > 0){
+                    curr_level -= 1;
+                }
+            }//end of ../ if
+
+        }
+        else{
+            curr_level += 1;
+        }
     }
-    //     int curr_level = 0;
+
     //     string curr_str = "";
     //     for(int x = 0; x < logs.size(); x++){
             
@@ -31,6 +43,6 @@ public:
     //             curr_str = "";
     //         }//end of logs[x]
     //     }
-    //     return current_level;
-    // }//end of function
+        return curr_level;
+    }//end of function
 };
