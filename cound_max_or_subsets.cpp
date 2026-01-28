@@ -25,6 +25,16 @@ public:
         int total_subsets = pow(2,nums.size());
 
         cout << "total_subsets " << total_subsets << endl;
+
+        //can change to start at 1 since 0 wouldn't matter anyway
+        for(int x = 1; x < total_subsets; x++){
+            //then based off the binary of each of these get the subset that's from the array index
+            //so the way I'm thinking of right now is a for loopwith each bit checking with an and but that's not good
+
+            //is there a fast way to convert a number with it's bits set to 1 to indexes
+            //
+            
+        }
         return 0;//placeholder
     }
 };
