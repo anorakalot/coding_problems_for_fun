@@ -21,7 +21,6 @@ public:
 
         //ok so looking up it's possible to get all subsets using a bit table for the maximum 
 
-
         int total_subsets = pow(2,nums.size());
 
         cout << "total_subsets " << total_subsets << endl;
@@ -33,8 +32,22 @@ public:
 
             //is there a fast way to convert a number with it's bits set to 1 to indexes
             //
+            //oh wait it wouldn't be O(N) since it would just be up to whatever x is
+
+            //count where the ones are om the current x value (subset value)
+            // then get the subset value?
+            //through array indexing
+
+            //also wouldn't the bit count total we go through be proportional to how big total_subsets is
+
+            
+
             
         }
+
+
+
         return 0;//placeholder
+
     }
 };
