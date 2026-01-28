@@ -4,7 +4,7 @@ public:
         //trying to think of a bitwise approach that's not just o(n^2) looping through and trying each possible combination
 
         //wouldn't the max always be all of them together? then it's just a matter of which subsets equal it?
-
+        // cout<<"nums.size()"<< nums.size()<< endl;
         int max_value = 0;
         for (int x = 0; x < nums.size(); x++){
             max_value |= nums[x];
@@ -15,6 +15,16 @@ public:
         //would a good way to be checking if the value has a bit set at one of them the max_value is set at?
         //get the subset 2^n then minus all the ones that aren't have the bit values?
 
+        //but all of them would have the bit values
+
+        //woiudn't the combinations just be whichever ones that have the most bits. like if 
+
+        //ok so looking up it's possible to get all subsets using a bit table for the maximum 
+
+
+        int total_subsets = pow(2,nums.size());
+
+        cout << "total_subsets " << total_subsets << endl;
         return 0;//placeholder
     }
 };
