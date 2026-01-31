@@ -1,0 +1,5 @@
+simulator to use
+
+other than wokwi for microcontroller simulation with arduino code maybe use webots in order to rapidly prototype the robot
+
+it doesn't work with arduino code but I can simulate a bunch of the necessary c++ code already in it so hopefully there's not much transition pain

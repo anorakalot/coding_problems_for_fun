@@ -37,6 +37,8 @@
 ////////////////////////////////
 
 
+//ALSO MAYBE TRY WEBOTS FOR SIMULATION
+
 /*In this basic free RTOS tutorial will use xTaskCreatePinnedToCore() . 
 in order to enable us to select which ESP32 core (core 0 or core 1) will run the particular task.*/
 
