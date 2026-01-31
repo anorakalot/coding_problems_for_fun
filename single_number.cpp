@@ -8,21 +8,38 @@ public:
             return nums[0];
         }
 
-        int curr_val = 0xFF & nums[0];
-        int first_val = curr_val;
+       int curr_val = nums[0];
 
-        int num_of_matching_pairs = (nums.size() -1) / 2;
+        // int curr_val = 0xFF & nums[0];
+        // int first_val = curr_val;
 
-        cout << "num_of_matching_pairs: " <<num_of_matching_pairs << endl;
+        // int num_of_matching_pairs = (nums.size() -1) / 2;
 
-        
-        for (int x = 0; x < nums.size(); x++){
+        // cout << "num_of_matching_pairs: " <<num_of_matching_pairs << endl;
+
+        for (int x = 1; x < nums.size(); x++){
             // if ( (curr_val & nums[x]) != first_val){
             //     return nums[x];
             // }    
             
             // 0100 ^ 0001 = 0101 ^ 0010 = 0110 
             //oh wait a matching pair would make the value less than?
+
+            //0010 0010 = 00 ^ 0001 =
+            //so any value that's not matching makes it more than?
+
+            // 0100 0001 0010 0001 0010
+            // 0101
+            // 0010
+
+            // 0111
+            // 0001
+
+
+            // oh wait the only one left is the one that's single
+
+            curr_val ^= nums[x];
+
         }
 
         //hint said xor?
@@ -48,6 +65,6 @@ public:
         //also can't do double for loop just loop twice checking each number
 
 
-        return 0;
+        return curr_val;
     }
 };
