@@ -1,0 +1,35 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.19171122667309928 0.17783153029857715 0.9652060673240517 1.6736377236701447
+  position 0.1888541762959004 -2.4346229363509875 0.7863647729346305
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 2 2
+}
+Robot {
+  children [
+    Shape {
+      appearance Appearance {
+        texture ImageTexture {
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+    Lidar {
+    }
+  ]
+  name "tatami_bot"
+}
