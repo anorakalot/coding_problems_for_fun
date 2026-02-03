@@ -7,8 +7,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.22727402598459698 -0.28217154816471235 -0.9320545770066698 4.292254842245788
-  position -0.479697351553998 -0.1404475289549033 0.00805310163890484
+  orientation 0.29644928152408406 0.2268242484831321 -0.9277222557338574 1.7783646009975758
+  position -0.4864478175938395 0.08932468159712481 0.037937397606542814
 }
 TexturedBackground {
 }
@@ -19,8 +19,70 @@ RectangleArena {
   floorSize 2 2
 }
 Robot {
-  translation -0.49 0 0
+  translation -0.5 0 0
   children [
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 -0.02 0.0045
+      }
+      device [
+        RotationalMotor {
+          name "right wheel motor"
+          maxVelocity 140
+        }
+        PositionSensor {
+          name "right wheel sensor"
+        }
+      ]
+      endPoint DEF ELISA3_RIGHT_WHEEL Solid {
+        translation 0.01 -0.02 0.0045
+        rotation 0 1 0 0
+        children [
+          DEF WHEEL_TRANSFORM Group {
+            children [
+              Pose {
+                rotation 1 0 0 1.57
+                children [
+                  Shape {
+                    appearance PBRAppearance {
+                      roughness 0.4
+                      metalness 0
+                    }
+                    geometry Cylinder {
+                      height 0.002
+                      radius 0.0042
+                      subdivision 20
+                    }
+                  }
+                ]
+              }
+              Pose {
+                rotation 1 0 0 1.57
+                children [
+                  Shape {
+                    appearance PBRAppearance {
+                      baseColor 0 0 0
+                      roughness 0.3
+                      metalness 0
+                    }
+                    geometry Cylinder {
+                      height 0.001
+                      radius 0.0045
+                      subdivision 20
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+        name "right wheel_front"
+        boundingObject USE WHEEL_TRANSFORM
+        physics Physics {
+        }
+      }
+    }
     Group {
     }
     DEF ELISA3_REFLECTIVE_SOLID Solid {
@@ -58,7 +120,7 @@ Robot {
         }
       ]
       endPoint DEF ELISA3_LEFT_WHEEL Solid {
-        translation 0 0.02 0.0045
+        translation -0.01 0.02 0.0045
         rotation 0 1 0 0
         children [
           DEF WHEEL_TRANSFORM Group {
@@ -120,7 +182,7 @@ Robot {
         }
       ]
       endPoint DEF ELISA3_RIGHT_WHEEL Solid {
-        translation 0 -0.02 0.0045
+        translation -0.01 -0.02 0.0045
         rotation 0 1 0 0
         children [
           USE WHEEL_TRANSFORM
@@ -353,80 +415,6 @@ Robot {
             }
           ]
           name "diffuser"
-        }
-        DEF ELISA3_LED_SUPPORT_FRONT Solid {
-          translation 0.04 -0.0072 -0.0615
-          children [
-            DEF ELISA3_LED_SUPPORT_TRANSFORM Pose {
-              rotation 1 0 0 1.5708
-              children [
-                Shape {
-                  appearance PBRAppearance {
-                    baseColor 0.796078 0.823529 0.937255
-                    roughness 0.3
-                  }
-                  geometry Cylinder {
-                    height 0.0028
-                    radius 0.00135
-                    subdivision 20
-                  }
-                }
-                Pose {
-                  translation 0 0 0.0009
-                  children [
-                    Shape {
-                      appearance PBRAppearance {
-                        baseColor 0.796078 0.823529 0.937255
-                        roughness 0.3
-                      }
-                      geometry Sphere {
-                        radius 0.00135
-                        subdivision 3
-                      }
-                    }
-                  ]
-                }
-                Pose {
-                  translation -0.0005 0 -0.004
-                  children [
-                    Shape {
-                      appearance PBRAppearance {
-                        roughness 0.3
-                      }
-                      geometry Cylinder {
-                        height 0.006
-                        radius 0.0001
-                        subdivision 20
-                      }
-                    }
-                  ]
-                }
-                Pose {
-                  translation 0.0005 0 -0.004
-                  children [
-                    Shape {
-                      appearance PBRAppearance {
-                        roughness 0.3
-                      }
-                      geometry Cylinder {
-                        height 0.006
-                        radius 0.0001
-                        subdivision 20
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-          name "led support front"
-        }
-        DEF ELISA3_LED_SUPPORT_BACK Solid {
-          translation 0.04 -0.006 -0.019
-          children [
-            USE ELISA3_LED_SUPPORT_TRANSFORM
-          ]
-          name "led support back"
         }
         DEF ELISA3_ACCELEROMETER Solid {
           children [
@@ -1340,6 +1328,7 @@ Robot {
   }
 }
 Robot {
+  translation 0 -0.59 0
   children [
     Shape {
       appearance Appearance {
