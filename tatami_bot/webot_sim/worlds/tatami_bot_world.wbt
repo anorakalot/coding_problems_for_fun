@@ -7,8 +7,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.29644928152408406 0.2268242484831321 -0.9277222557338574 1.7783646009975758
-  position -0.4864478175938395 0.08932468159712481 0.037937397606542814
+  orientation 0.2463394754301401 0.2795752973759416 -0.9279841140568933 1.8053968438184609
+  position -0.4797481590701268 0.097783855190469 0.04488359856866839
 }
 TexturedBackground {
 }
@@ -21,6 +21,68 @@ RectangleArena {
 Robot {
   translation -0.5 0 0
   children [
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.02 0.0045
+      }
+      device [
+        RotationalMotor {
+          name "left wheel motor"
+          maxVelocity 133.33
+        }
+        PositionSensor {
+          name "left wheel sensor"
+        }
+      ]
+      endPoint DEF ELISA3_LEFT_WHEEL Solid {
+        translation 0.01 0.02 0.0045
+        rotation 0 1 0 0
+        children [
+          DEF WHEEL_TRANSFORM Group {
+            children [
+              Pose {
+                rotation 1 0 0 1.57
+                children [
+                  Shape {
+                    appearance PBRAppearance {
+                      roughness 0.4
+                      metalness 0
+                    }
+                    geometry Cylinder {
+                      height 0.002
+                      radius 0.0042
+                      subdivision 20
+                    }
+                  }
+                ]
+              }
+              Pose {
+                rotation 1 0 0 1.57
+                children [
+                  Shape {
+                    appearance PBRAppearance {
+                      baseColor 0 0 0
+                      roughness 0.3
+                      metalness 0
+                    }
+                    geometry Cylinder {
+                      height 0.001
+                      radius 0.0045
+                      subdivision 20
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+        name "left wheel(1)"
+        boundingObject USE WHEEL_TRANSFORM
+        physics Physics {
+        }
+      }
+    }
     HingeJoint {
       jointParameters HingeJointParameters {
         axis 0 1 0
