@@ -55,7 +55,13 @@ public:
                 } 
             }
             else if (s[s_index] < g[g_index]){
-                s_index += 1;
+                
+                if(s_dir == 1){
+                    s_index -=1;
+                }
+                else{
+                    s_index += 1;
+                }
             }
         }
     
