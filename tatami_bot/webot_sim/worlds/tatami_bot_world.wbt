@@ -1591,6 +1591,7 @@ Robot {
       ]
       endPoint DEF WHEEL_SOLID Solid {
         translation 0.228 -0.158 -0.055
+        rotation 0 1 0 0
         children [
           Shape {
             appearance PBRAppearance {
@@ -1788,6 +1789,7 @@ Robot {
       ]
       endPoint DEF WHEEL_SOLID Solid {
         translation 0.228 0.158 -0.055
+        rotation 0 1 0 0
         children [
           Shape {
             appearance PBRAppearance {
@@ -1985,6 +1987,7 @@ Robot {
       ]
       endPoint DEF WHEEL_SOLID Solid {
         translation -0.228 -0.158 -0.055
+        rotation 0 1 0 0
         children [
           Shape {
             appearance PBRAppearance {
@@ -2182,6 +2185,7 @@ Robot {
       ]
       endPoint DEF WHEEL_SOLID Solid {
         translation -0.228 0.158 -0.055
+        rotation 0 1 0 0
         children [
           Shape {
             appearance PBRAppearance {
@@ -2473,4 +2477,5 @@ Robot {
       0 0 0
     ]
   }
+  controller "my_controller_for_youbot"
 }
