@@ -7,8 +7,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.20633623833248643 0.2780019747050287 -0.938157907183489 1.5093917789382245
-  position -0.42313142837478657 2.2702804337741016 1.7099141580837183
+  orientation -0.35536048590168046 0.3127763553958853 0.8808461140091318 1.6020616010726023
+  position -2.141333076939306 -6.486194666248153 6.8977651631707655
 }
 TexturedBackground {
 }
@@ -1409,6 +1409,12 @@ Robot {
 Robot {
   translation -0.38 0 0.12
   children [
+    Lidar {
+      translation 0 0.15 0
+      rotation 0 0 1 1.5708
+      name "left_lidar"
+      maxRange 10
+    }
     Group {
       children [
         Shape {
@@ -2477,5 +2483,5 @@ Robot {
       0 0 0
     ]
   }
-  controller "my_controller_for_youbot"
+  controller "youbot"
 }
