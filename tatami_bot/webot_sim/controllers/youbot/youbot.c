@@ -22,6 +22,7 @@
 
 #include <webots/keyboard.h>
 #include <webots/robot.h>
+#include <webots/lidar.h>
 
 // #include <base.h>
 
