@@ -522,7 +522,9 @@ static void display_helper_message() {
 
 int main(int argc, char **argv) {
   wb_robot_init();
-
+  // void wb_lidar_enable(WbDeviceTag tag, int sampling_period);
+  // wb_lidar_enable(
+  
   base_init();
   passive_wait(2.0);
 
