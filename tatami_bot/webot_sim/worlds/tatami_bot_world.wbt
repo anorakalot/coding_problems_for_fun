@@ -7,8 +7,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.01908758095339895 0.9991267695130782 -0.037166687984105065 0.8906659471079234
-  position -2.1000340655438605 -0.057807833160852695 2.1316055701587007
+  orientation -0.0019174323329953402 0.9979123123337044 -0.06455494052392634 0.9521179385095779
+  position -1.9780081538023304 0.11233977623390622 2.226426395269024
 }
 TexturedBackground {
 }
@@ -17,23 +17,6 @@ TexturedBackgroundLight {
 RectangleArena {
   translation -0.42 0 0
   floorSize 10 10
-}
-Robot {
-  translation -4.83 -2.11 0
-  children [
-    Shape {
-      appearance Appearance {
-        texture ImageTexture {
-        }
-      }
-      geometry Box {
-        size 0.1 0.1 0.05
-      }
-    }
-    Lidar {
-    }
-  ]
-  name "tatami_bot"
 }
 Robot {
   translation -0.38 0 0.12
