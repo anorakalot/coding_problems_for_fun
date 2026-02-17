@@ -524,7 +524,15 @@ int main(int argc, char **argv) {
   wb_robot_init();
   // void wb_lidar_enable(WbDeviceTag tag, int sampling_period);
   WbDeviceTag front_lidar = wb_robot_get_device("front_lidar");
+  WbDeviceTag back_lidar = wb_robot_get_device("back_lidar");
+  WbDeviceTag left_lidar = wb_robot_get_device("left_lidar");
+  WbDeviceTag right_lidar = wb_robot_get_device("right_lidar");
+ 
   wb_lidar_enable(front_lidar,1000);
+  wb_lidar_enable(back_lidar,1000);
+  wb_lidar_enable(left_lidar,1000);
+  wb_lidar_enable(right_lidar,1000);
+  
   
   base_init();
   passive_wait(2.0);
