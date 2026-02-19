@@ -513,12 +513,12 @@ static void automatic_behavior() {
   passive_wait(2.0);
 }
 
-static void display_helper_message() {
-  printf("\n \nControl commands:\n");
-  printf(" Arrows:         Move the robot\n");
-  printf(" Page Up/Down:   Rotate the robot\n");
-  printf(" Space:          Reset\n");
-}
+// static void display_helper_message() {
+  // printf("\n \nControl commands:\n");
+  // printf(" Arrows:         Move the robot\n");
+  // printf(" Page Up/Down:   Rotate the robot\n");
+  // printf(" Space:          Reset\n");
+// }
 
 int main(int argc, char **argv) {
   wb_robot_init();
@@ -533,72 +533,132 @@ int main(int argc, char **argv) {
   wb_lidar_enable(left_lidar,1000);
   wb_lidar_enable(right_lidar,1000);
   
+  typedef struct {
+    char dir[1];
+    int distance;
+  }movement_instruction;
+
+  movement_instruction move_instrs[100];
+  move_instrs[0].dir = 'u';
+  move_instrs[0].distance = 2;
+  move_instrs[1].dir = 'r';
+  move_instrs[1].distance = 4;
+  move_instrs[2].dir = 'd';
+  move_instrs[2].distance = 3;
+  move_instrs[3].dir = 'l';
+  move_instrs[3].distance = 5;
+ 
   
+  int move_instrc_limit = 4;
+      
+
+  enum robot_state = {robot_init,read_in_movement_instructions,get_lidar_distance, do_movement, end_state }
   base_init();
   passive_wait(2.0);
 
-  if (argc > 1 && strcmp(argv[1], "demo") == 0)
-    automatic_behavior();
+  // if (argc > 1 && strcmp(argv[1], "demo") == 0)
+    // automatic_behavior();
 
-  display_helper_message();
+  // display_helper_message();
 
   int pc = 0;
-  wb_keyboard_enable(TIME_STEP);
+  // wb_keyboard_enable(TIME_STEP);
 
   while (true) {
-    step();
+    step();//if time is -1 call wb_robot_cleanup to end
 
-    int c = wb_keyboard_get_key();
-    if ((c >= 0) && c != pc) {
-      switch (c) {
-        case WB_KEYBOARD_UP:
-          base_forwards_increment();
+    //ok so should put in some proto code for reading in the pattern
+    //maybe do the same thing saying direction and time? but wouldn't I want it to be more precise and 
+    //be the set distance each time
+    //maybe have it set as     
+    
+    
+    //ok so state machine is like this
+
+    //first read from
+    
+    switch(robot_state){//actions and transitions
+      case robot_init:
+         robot_state = read_in_movement_instructions;
+         break;
+      case read_in_movement_instructions:
+  			
+        
+        robot_state = read_in_movement_instructions;
+        break;
+      
+      case get_lidar_distance:
+        //get_starting_robot_distance
+        
+        //check if it's more than the movement instruction current index
+
+        //if so
+
+
+        break;
+
+      case do_movement:
+          robot_state = WAIT_MENU;
           break;
-        case WB_KEYBOARD_DOWN:
-          base_backwards_increment();
+
+      default:
+          robot_state = robot_init;
           break;
-        case WB_KEYBOARD_LEFT:
-          base_strafe_left_increment();
-          break;
-        case WB_KEYBOARD_RIGHT:
-          base_strafe_right_increment();
-          break;
-        case WB_KEYBOARD_PAGEUP:
-          base_turn_left_increment();
-          break;
-        case WB_KEYBOARD_PAGEDOWN:
-          base_turn_right_increment();
-          break;
-        case WB_KEYBOARD_END:
-        case ' ':
-          printf("Reset\n");
-          base_reset();
-          break;
-        case '+':
-        case 388:
-        case 65585:
-          break;
-        case '-':
-        case 390:
-          break;
-        case 332:
-        case WB_KEYBOARD_UP | WB_KEYBOARD_SHIFT:
-          break;
-        case 326:
-        case WB_KEYBOARD_DOWN | WB_KEYBOARD_SHIFT:
-          break;
-        case 330:
-        case WB_KEYBOARD_RIGHT | WB_KEYBOARD_SHIFT:
-          break;
-        case 328:
-        case WB_KEYBOARD_LEFT | WB_KEYBOARD_SHIFT:
-          break;
-        default:
-          fprintf(stderr, "Wrong keyboard input\n");
-          break;
-      }
-    }
-    pc = c;
+   }
+
+	
+    
+    // int c = wb_keyboard_get_key();
+    // if ((c >= 0) && c != pc) {
+      // switch (c) {
+        // case WB_KEYBOARD_UP:
+          // base_forwards_increment();
+          // break;
+        // case WB_KEYBOARD_DOWN:
+          // base_backwards_increment();
+          // break;
+        // case WB_KEYBOARD_LEFT:
+          // base_strafe_left_increment();
+          // break;
+        // case WB_KEYBOARD_RIGHT:
+          // base_strafe_right_increment();
+          // break;
+        // case WB_KEYBOARD_PAGEUP:
+          // base_turn_left_increment();
+          // break;
+        // case WB_KEYBOARD_PAGEDOWN:
+          // base_turn_right_increment();
+          // break;
+        // case WB_KEYBOARD_END:
+        // case ' ':
+          // printf("Reset\n");
+          // base_reset();
+          // break;
+        // case '+':
+        // case 388:
+        // case 65585:
+          // break;
+        // case '-':
+        // case 390:
+          // break;
+        // case 332:
+        // case WB_KEYBOARD_UP | WB_KEYBOARD_SHIFT:
+          // break;
+        // case 326:
+        // case WB_KEYBOARD_DOWN | WB_KEYBOARD_SHIFT:
+          // break;
+        // case 330:
+        // case WB_KEYBOARD_RIGHT | WB_KEYBOARD_SHIFT:
+          // break;
+        // case 328:
+        // case WB_KEYBOARD_LEFT | WB_KEYBOARD_SHIFT:
+          // break;
+        // default:
+          // fprintf(stderr, "Wrong keyboard input\n");
+          // break;
+      // }
+    // }
+    // pc = c;
   }
 
   wb_robot_cleanup();
