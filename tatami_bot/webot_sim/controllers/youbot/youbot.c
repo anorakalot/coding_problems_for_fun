@@ -489,29 +489,29 @@ static void passive_wait(double sec) {
   } while (start_time + sec > wb_robot_get_time());
 }
 
-static void automatic_behavior() {
-  passive_wait(2.0);
-  passive_wait(4.0);
-  passive_wait(1.0);
-  passive_wait(3.0);
-  passive_wait(1.0);
-  base_strafe_left();
-  passive_wait(5.0);
-  base_reset();
-  passive_wait(1.0);
-  base_turn_left();
-  passive_wait(1.0);
-  base_reset();
-  passive_wait(3.0);
-  passive_wait(1.0);
-  passive_wait(2.0);
-  passive_wait(4.0);
-  passive_wait(2.0);
-  passive_wait(1.0);
-  passive_wait(2.0);
-  passive_wait(2.0);
-  passive_wait(2.0);
-}
+// static void automatic_behavior() {
+  // passive_wait(2.0);
+  // passive_wait(4.0);
+  // passive_wait(1.0);
+  // passive_wait(3.0);
+  // passive_wait(1.0);
+  // base_strafe_left();
+  // passive_wait(5.0);
+  // base_reset();
+  // passive_wait(1.0);
+  // base_turn_left();
+  // passive_wait(1.0);
+  // base_reset();
+  // passive_wait(3.0);
+  // passive_wait(1.0);
+  // passive_wait(2.0);
+  // passive_wait(4.0);
+  // passive_wait(2.0);
+  // passive_wait(1.0);
+  // passive_wait(2.0);
+  // passive_wait(2.0);
+  // passive_wait(2.0);
+// }
 
 // static void display_helper_message() {
   // printf("\n \nControl commands:\n");
@@ -519,6 +519,25 @@ static void automatic_behavior() {
   // printf(" Page Up/Down:   Rotate the robot\n");
   // printf(" Space:          Reset\n");
 // }
+ typedef struct {
+   float distance_left;
+   float distance_right;
+   float distance_front;
+   float distance_back;
+ 
+ }lidar_distances_t;
+ 
+
+void get_lidar_distances(WbDeviceTag front_tag,WbDeviceTag back_tag,
+WbDeviceTag left_tag, WbDeviceTag right_tag  ,lidar_distances_t * lidar_dist){
+  
+  lidar_dist->distance_front = wb_lidar_get_range_image(front_tag);
+  
+  lidar_dist->distance_back = wb_lidar_get_range_image(back_tag);
+  lidar_dist->distance_left = wb_lidar_get_range_image(left_tag);
+  lidar_dist->distance_right = wb_lidar_get_range_image(right_tag);
+  
+}
 
 int main(int argc, char **argv) {
   wb_robot_init();
@@ -536,23 +555,37 @@ int main(int argc, char **argv) {
   typedef struct {
     char dir[1];
     int distance;
-  }movement_instruction;
+  }movement_instruction_t;
 
-  movement_instruction move_instrs[100];
-  move_instrs[0].dir = 'u';
+
+  movement_instruction_t move_instrs[100];
+  move_instrs[0].dir[0] = 'u';
   move_instrs[0].distance = 2;
-  move_instrs[1].dir = 'r';
+  move_instrs[1].dir[0] = 'r';
   move_instrs[1].distance = 4;
-  move_instrs[2].dir = 'd';
+  move_instrs[2].dir[0] = 'd';
   move_instrs[2].distance = 3;
-  move_instrs[3].dir = 'l';
+  move_instrs[3].dir[0] = 'l';
   move_instrs[3].distance = 5;
  
+ 
+
+ 
+ 
+  lidar_distances_t starting_lidar_distances;
+  lidar_distances_t curr_lidar_distances;
+  // lidar_distance_t * starting_lidar_distance_pointer = & starting_lidar_distance;
   
   int move_instrc_limit = 4;
-      
+  int move_instrc_index = 0;
 
-  enum robot_state = {robot_init,read_in_movement_instructions,get_lidar_distance, do_movement, end_state }
+  typedef enum  {robot_init,
+  read_in_movement_instructions,get_starting_lidar_distances,
+  get_lidar_distance, do_movement ,stop_movement, end_state } robot_state_t;
+  
+  robot_state_t robot_state = robot_init;
+
+  
   base_init();
   passive_wait(2.0);
 
@@ -561,7 +594,7 @@ int main(int argc, char **argv) {
 
   // display_helper_message();
 
-  int pc = 0;
+  // int pc = 0;
   // wb_keyboard_enable(TIME_STEP);
 
   while (true) {
@@ -581,14 +614,20 @@ int main(int argc, char **argv) {
       case robot_init:
          robot_state = read_in_movement_instructions;
          break;
+
       case read_in_movement_instructions:
-  			
-        
-        robot_state = read_in_movement_instructions;
+        	
+        robot_state = get_lidar_distance;
         break;
       
-      case get_lidar_distance:
+      case get_starting_lidar_distances:
         //get_starting_robot_distance
+        
+        get_lidar_distances(front_lidar,back_lidar,left_lidar,right_lidar, &starting_lidar_distances);
+        
+        break;
+      case get_lidar_distances:
+        
         
         //check if it's more than the movement instruction current index
 
@@ -598,9 +637,12 @@ int main(int argc, char **argv) {
         break;
 
       case do_movement:
-          robot_state = WAIT_MENU;
+          robot_state = robot_init;
           break;
 
+      case stop_movement:
+          
+          break;
       default:
           robot_state = robot_init;
           break;
