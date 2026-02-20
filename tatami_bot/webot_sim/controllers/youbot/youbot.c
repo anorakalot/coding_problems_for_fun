@@ -519,12 +519,14 @@ static void passive_wait(double sec) {
   // printf(" Page Up/Down:   Rotate the robot\n");
   // printf(" Space:          Reset\n");
 // }
+
+//gonna need to find a way to statically allocate these later
  typedef struct {
-   float distance_left;
-   float distance_right;
-   float distance_front;
-   float distance_back;
- 
+   const float *distance_front;
+   const float *distance_back;
+   const float *distance_left;
+   const float *distance_right;
+    
  }lidar_distances_t;
  
 
@@ -581,7 +583,7 @@ int main(int argc, char **argv) {
 
   typedef enum  {robot_init,
   read_in_movement_instructions,get_starting_lidar_distances,
-  get_lidar_distance, do_movement ,stop_movement, end_state } robot_state_t;
+  get_lidar_distances_during_movement, do_movement ,stop_movement, end_state } robot_state_t;
   
   robot_state_t robot_state = robot_init;
 
@@ -617,7 +619,7 @@ int main(int argc, char **argv) {
 
       case read_in_movement_instructions:
         	
-        robot_state = get_lidar_distance;
+        robot_state = get_starting_lidar_distances;
         break;
       
       case get_starting_lidar_distances:
@@ -626,7 +628,7 @@ int main(int argc, char **argv) {
         get_lidar_distances(front_lidar,back_lidar,left_lidar,right_lidar, &starting_lidar_distances);
         
         break;
-      case get_lidar_distances:
+      case get_lidar_distances_during_movement:
         
         
         //check if it's more than the movement instruction current index
