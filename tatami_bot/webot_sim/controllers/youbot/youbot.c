@@ -555,22 +555,22 @@ int main(int argc, char **argv) {
   wb_lidar_enable(right_lidar,1000);
   
   typedef struct {
-    char dir[1];
+    char dir;
     int distance;
   }movement_instruction_t;
 
 
   movement_instruction_t move_instrs[100];
-  move_instrs[0].dir[0] = 'u';
+  move_instrs[0].dir = 'u';
   move_instrs[0].distance = 2;
-  move_instrs[1].dir[0] = 'r';
+  move_instrs[1].dir = 'r';
   move_instrs[1].distance = 4;
-  move_instrs[2].dir[0] = 'd';
+  move_instrs[2].dir = 'd';
   move_instrs[2].distance = 3;
-  move_instrs[3].dir[0] = 'l';
+  move_instrs[3].dir = 'l';
   move_instrs[3].distance = 5;
  
- 
+ movement_instruction_t curr_move_instr;
 
  
  
@@ -578,12 +578,12 @@ int main(int argc, char **argv) {
   lidar_distances_t curr_lidar_distances;
   // lidar_distance_t * starting_lidar_distance_pointer = & starting_lidar_distance;
   
-  int move_instrc_limit = 4;
-  int move_instrc_index = 0;
+  int move_instr_limit = 4;
+  int move_instr_index = -1;//starts at zero for first pass
 
   typedef enum  {robot_init,
   read_in_movement_instructions,get_starting_lidar_distances,
-  get_lidar_distances_during_movement, do_movement ,stop_movement, end_state } robot_state_t;
+  get_lidar_distances_during_movement, do_movement ,stop_movement, robot_end_state } robot_state_t;
   
   robot_state_t robot_state = robot_init;
 
@@ -618,8 +618,17 @@ int main(int argc, char **argv) {
          break;
 
       case read_in_movement_instructions:
-        	
-        robot_state = get_starting_lidar_distances;
+        move_instr_index += 1;
+        if (move_instr_index < move_instr_limit){
+          curr_move_instr.dir = move_instrs[move_instr_index].dir;
+          curr_move_instr.distance = move_instrs[move_instr_index].distance;
+          robot_state = get_starting_lidar_distances;
+        
+        }
+        else{
+          robot_state = robot_end_state;
+        }
+        
         break;
       
       case get_starting_lidar_distances:
@@ -644,6 +653,9 @@ int main(int argc, char **argv) {
 
       case stop_movement:
           
+          break;
+      case robot_end_state:
+      
           break;
       default:
           robot_state = robot_init;
